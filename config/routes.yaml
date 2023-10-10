@@ -1,0 +1,5 @@
+controllers:
+    resource:
+        path: ../src/Ketcau/Controller/
+        namespace: Ketcau\Controller
+    type: attribute

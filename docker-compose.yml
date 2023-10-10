@@ -1,0 +1,29 @@
+version: "3"
+
+networks:
+  backend:
+    driver: bridge
+
+
+services:
+  ketcau:
+    build: ./dockerfile/apache
+    ports:
+      - 8088:80
+    volumes:
+      - ./:/home/daisuke/project/ketcau/
+    environment:
+      APACHE_DOCUMENT_ROOT: /home/daisuke/project/ketcau/html
+      APP_ENV: "dev"
+      APP_DEBUG: 1
+    networks:
+      - backend
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1880:1080"
+      - "1825:1025"
+    networks:
+      - backend
+
