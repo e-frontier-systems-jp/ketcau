@@ -34,7 +34,7 @@ class Kernel extends BaseKernel
     {
         $projectDir = $container->getParameter('kernel.project_dir');
 
-        $paths = ['%kernel.project_dir%/src/Ketcau/Entity'];
+        $paths = ['%kernel.project_dir%/Ketcau/Entity'];
         $namespaces = ['Ketcau\\Entity'];
         $reader = new Reference('annotation_reader');
         $driver = new Definition(AnnotationDriver::class, [$reader, $paths]);

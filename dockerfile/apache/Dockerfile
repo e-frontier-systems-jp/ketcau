@@ -1,6 +1,6 @@
 FROM php:8.1-apache
 
-ENV APACHE_DOCUMENT_ROOT /var/www/ketcau/html
+ENV APACHE_DOCUMENT_ROOT /var/www/html
 
 RUN a2enmod deflate expires rewrite
 
@@ -18,7 +18,14 @@ RUN install-php-extensions xmlrpc
 RUN install-php-extensions redis
 RUN install-php-extensions xdebug
 RUN install-php-extensions DOM
+RUN install-php-extensions zip
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
+RUN cd /tmp
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
+    php composer-setup.php \
+    php -r "unlink('composer-setup.php');"
+RUN sudo mv composer.phar /usr/local/bin/composer
