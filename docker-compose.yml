@@ -11,9 +11,9 @@ services:
     ports:
       - 8088:80
     volumes:
-      - ./:/home/daisuke/project/ketcau/
+      - ./:/var/www
     environment:
-      APACHE_DOCUMENT_ROOT: /home/daisuke/project/ketcau/html
+      APACHE_DOCUMENT_ROOT: /var/www/html
       APP_ENV: "dev"
       APP_DEBUG: 1
     networks:
