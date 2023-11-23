@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# product: https://ogp.me/ns/product#">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="ketcau-csrf-token" content="{{ csrf_token(constant('Ketcau\\Common\\Constant::TOKEN_NAME')) }}" />
+    <title></title>
+
+    {% block stylesheet %}{% endblock %}
+    <script>
+
+    </script>
+</head>
+<body id="page_{{ app.request.get('_route') }}" class="{{ body_class|default('other_page') }}">
+{# Layout: BODY_AFTER #}
+
+    <main>
+        {# MAIN AREA #}
+        {% block main %}{% endblock %}
+    </main>
+
+</body>
+</html>

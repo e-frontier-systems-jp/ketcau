@@ -15,6 +15,7 @@
         "doctrine/orm": "^2.16",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.24",
+        "psr/container": "*",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "6.3.*",
         "symfony/console": "6.3.*",
@@ -94,7 +95,11 @@
         "symfony": {
             "allow-contrib": false,
             "require": "6.3.*"
-        }
+        },
+        "bin-dir": "bin",
+        "src-dir": "src/Ketcau",
+        "config-dir": "config",
+        "public-dir": "html"
     },
     "require-dev": {
         "symfony/debug-bundle": "6.3.*",

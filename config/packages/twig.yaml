@@ -1,5 +1,14 @@
 twig:
-    default_path: '%kernel.project_dir%/templates'
+#    default_path: '%kernel.project_dir%/templates'
+    globals:
+        BaseInfo: null
+        ketcau_config: '@Ketcau\Common\KetcauConfig'
+    paths:
+        '%ketcau_theme_front_default_dir%': ~
+        '%ketcau_theme_admin_default_dir%': admin
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes: ['bootstrap_5_layout.html.twig']
 
 when@test:
     twig:

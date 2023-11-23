@@ -24,7 +24,7 @@ class Kernel extends BaseKernel
     }
 
 
-    protected function build(ContainerBuilder $container)
+    protected function build(ContainerBuilder $container): void
     {
         $this->addEntityExtensionPass($container);
     }
