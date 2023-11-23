@@ -6,21 +6,30 @@
 parameters:
     container.dumper.inline_class_loader: true
 
+    env(KETCAU_LOCALE): 'ja'
+    env(KETCAU_TIMEZONE): 'Asia/Tokyo'
+    env(KETCAU_CURRENCY): 'JPY'
+    locale: '%env(KETCAU_LOCALE)%'
+    timezone: '%env(KETCAU_TIMEZONE)%'
+    currency: '%env(KETCAU_CURRENCY)%'
+
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     Ketcau\:
         resource: '../src/Ketcau'
-        exclude:
-            - '../src/Ketcau/DependencyInjection/'
-            - '../src/Ketcau/Entity/'
-            - '../src/Ketcau/Kernel.php'
-            - '../src/Ketcau/Doctrine/'
+        exclude: '../src/Ketcau/{Annotation,Common,Entity,Exception,Log,Plugin,ServiceProvider,Resource,Doctrine/ORM/tools/}'
+
+    Ketcau\Common\KetcauConfig:
+        public: true
+        alias: 'service_container'
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

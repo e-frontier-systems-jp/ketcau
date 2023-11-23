@@ -1,1 +1,2 @@
-GRANT ALL PRIVILEGES ON *.* TO 'dbuser'@'%';
+CREATE DATABASE ketcau;
+GRANT ALL PRIVILEGES ON ketcau.* TO 'ketcau'@'%' IDENTIFIED BY 'KETCAU';

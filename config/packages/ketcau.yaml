@@ -1,0 +1,4 @@
+parameters:
+  ketcau_theme_src_dir: '%kernel.project_dir%/src/Ketcau/Resource/template'
+  ketcau_theme_front_default_dir: '%ketcau_theme_src_dir%/default'
+  ketcau_theme_admin_default_dir: '%ketcau_theme_src_dir%/admin'

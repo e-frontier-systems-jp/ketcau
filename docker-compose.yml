@@ -9,7 +9,7 @@ services:
   ketcau:
     build: ./dockerfile/apache
     ports:
-      - 8088:80
+      - "8088:80"
     volumes:
       - ./:/var/www
     environment:

@@ -7,24 +7,24 @@ volumes:
 services:
   ketcau:
     depends_on:
-      mysql:
+      mariadb:
         condition: service_healthy
     environment:
-      DATABASE_URL: "mysql://dbuser:secret@mysql/ketcau"
+      DATABASE_URL: "mysql://ketcau:KETCAU@mariadb/ketcau"
       DATABASE_SERVER_VERSION: 5.7
       DATABASE_CHARSET: 'utf8mb4'
 
-  mysql:
-    image: mysql:5.7
+  mariadb:
+    image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: dbuser
-      MYSQL_PASSWORD: secret
+      MYSQL_USER: ketcau
+      MYSQL_PASSWORD: KETCAU
     volumes:
       - mysql-database:/var/lib/mysql
       - ./dockerfile/mysql/grant_to_dbuser.sql:/docker-entrypoint-initdb.d/grant_to_dbuser.sql
     ports:
-      - 3306:3306
+      - "3306:3306"
     networks:
       - backend
     healthcheck:
