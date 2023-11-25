@@ -58,6 +58,9 @@
         "sort-packages": true
     },
     "autoload": {
+        "files": [
+            "src/Ketcau/Resource/functions/trans.php"
+        ],
         "psr-4": {
             "Ketcau\\Entity\\": "app/proxy/entity",
             "Ketcau\\": "src/Ketcau"

@@ -1,0 +1,31 @@
+
+html, body {
+  font-size: 14px;
+}
+
+ul {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 0;
+}
+
+li {
+  list-style: none;
+}
+
+dl, ol, ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+a, button {
+  cursor: pointer;
+}
+
+
+@import 'component/header-bar';
+@import 'component/container';
+@import 'component/main-navi';
+@import 'component/contents';
