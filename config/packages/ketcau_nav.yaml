@@ -1,0 +1,13 @@
+parameters:
+  ketcau_nav:
+    product:
+      name: admin.product.product_management
+      icon: fa-cube
+      children:
+        product_master:
+          name: admin.product.product_list
+          url: admin_product
+    customer:
+      name: admin.customer.customer_management
+      icon: fa-user
+      url: homepage

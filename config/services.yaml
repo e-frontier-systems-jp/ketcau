@@ -27,8 +27,8 @@ services:
         exclude: '../src/Ketcau/{Annotation,Common,Entity,Exception,Log,Plugin,ServiceProvider,Resource,Doctrine/ORM/tools/}'
 
     Ketcau\Common\KetcauConfig:
-        public: true
-        alias: 'service_container'
+        arguments:
+          [ '@service_container' ]
 
 
     # add more service definitions when explicit configuration is needed

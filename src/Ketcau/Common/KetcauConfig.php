@@ -6,7 +6,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class KetcauConfig implements \ArrayAccess
 {
-    protected $container;
+    /**
+     * @var ContainerInterface
+     */
+    protected ContainerInterface $container;
 
 
     public function __construct(ContainerInterface $container)
@@ -33,6 +36,17 @@ class KetcauConfig implements \ArrayAccess
     }
 
 
+    public function __get($key)
+    {
+        return $this->get($key);
+    }
+
+
+
+    /**
+     * @param mixed $offset
+     * @return bool
+     */
     #[\ReturnTypeWillChange]
     public function offsetExists(mixed $offset): bool
     {
@@ -40,6 +54,10 @@ class KetcauConfig implements \ArrayAccess
     }
 
 
+    /**
+     * @param mixed $offset
+     * @return mixed
+     */
     #[\ReturnTypeWillChange]
     public function offsetGet(mixed $offset): mixed
     {
@@ -47,6 +65,11 @@ class KetcauConfig implements \ArrayAccess
     }
 
 
+    /**
+     * @param mixed $offset
+     * @param mixed $value
+     * @return void
+     */
     #[\ReturnTypeWillChange]
     public function offsetSet(mixed $offset, mixed $value): void
     {

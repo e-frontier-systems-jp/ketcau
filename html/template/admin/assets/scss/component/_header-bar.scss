@@ -1,0 +1,23 @@
+@import '../library/variables';
+
+
+.c-header-bar {
+
+  width: 100%;
+  height: 65px;
+  color: #ffffff;
+  background-color: $ketcau-navy;
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  z-index: 1000;
+  a {
+    color: #ffffff;
+    &:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+  }
+
+
+}

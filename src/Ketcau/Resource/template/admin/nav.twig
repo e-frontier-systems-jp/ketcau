@@ -1,0 +1,22 @@
+<nav class="c-main-nav">
+    <ul>
+        <li class="c-main-nav-item">
+            <a class="c-main-nav-item-title" href="{{ url('admin_homepage') }}">
+                <i class="fa fa-home fa-fw" aria-hidden="true"></i>
+                <span>{{ 'admin.home'|trans }}</span>
+            </a>
+        </li>
+        {% for key1, level1 in ketcau_config.get('ketcau_nav') %}
+            <li class="c-main-nav-item">
+                {% if level1.children is defined and level1.children|length > 0 %}
+                    <a class="c-main-nav-item-title{{ active_menus(menus)[0] != key1 ? 'collapsed' }}"
+                {% else %}
+                    <a class="c-main-nav-item-title" href="{{ url(level1.url, level1.param is defined ? level1.param : []) }}">
+                        <i class="fa {{ level1.icon }}" aria-hidden="true"></i>
+                        <span>{{ level1.name|trans }}</span>
+                    </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
