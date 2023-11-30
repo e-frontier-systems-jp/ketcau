@@ -24,4 +24,18 @@
 
 admin.home: ホーム
 
+admin.common.create_new: 新規作成
+
 admin.customer.customer_management: 顧客管理
+
+admin.customer.seller_management: 販売者管理
+admin.customer.seller_attestation: 販売者承認
+admin.customer.buyer_management: 購入者管理
+admin.customer.buyer_attestation: 購入者承認
+
+admin.product.product_management: 商品管理
+admin.product.product_list: 商品一覧
+admin.product.seller_master: 販売者一覧
+
+admin.content.contents_management: コンテンツ管理
+admin.content.layout_management: レイアウト管理

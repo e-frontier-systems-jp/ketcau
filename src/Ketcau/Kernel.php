@@ -33,7 +33,7 @@ class Kernel extends BaseKernel
     }
 
 
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 
@@ -52,7 +52,7 @@ class Kernel extends BaseKernel
     }
 
 
-    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $confDir = $this->getProjectDir(). '/config/';
         $loader->load($confDir. '/services'. self::CONFIG_EXTS, 'glob');
@@ -79,7 +79,7 @@ class Kernel extends BaseKernel
     {
         $projectDir = $container->getParameter('kernel.project_dir');
 
-        $paths = ['%kernel.project_dir%/Ketcau/Entity'];
+        $paths = ['%kernel.project_dir%/src/Ketcau/Entity'];
         $namespaces = ['Ketcau\\Entity'];
         $reader = new Reference('annotation_reader');
         $driver = new Definition(AnnotationDriver::class, [$reader, $paths]);

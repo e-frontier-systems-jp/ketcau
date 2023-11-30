@@ -1,0 +1,22 @@
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['content', 'layout'] %}
+
+{% block title %}{{ 'admin.content.layout_management'|trans }}{% endblock %}
+{% block sub_title %}{{ 'admin.content.contents_management'|trans }}{% endblock %}
+
+
+{% block main %}
+    <div class="c-contents-cols">
+        <div class="c-contents-primary-col">
+
+            <div class="c-primary-col">
+                <div class="d-block mb-3">
+                    <a class="btn btn-primary" href="#">{{ 'admin.common.create_new'|trans }}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock main %}

@@ -1,0 +1,22 @@
+
+.c-page-titles {
+  display: table;
+  margin-bottom: 20px;
+  padding: 15px;
+  width: 100%;
+  background: #ffffff;
+
+  > .c-page-titles-title {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 0;
+    font-size: 20px;
+    vertical-align: middle;
+  }
+
+  > .c-page-titles-sub-title {
+    display: inline-block;
+    font-size: 16px;
+    vertical-align: middle;
+  }
+}

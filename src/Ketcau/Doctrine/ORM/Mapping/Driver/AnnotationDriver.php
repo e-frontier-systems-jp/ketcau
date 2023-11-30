@@ -5,7 +5,7 @@ namespace Ketcau\Doctrine\ORM\Mapping\Driver;
 use Doctrine\Persistence\Mapping\MappingException;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver as AnnotationDriverBase;
 
-class AnnotationDriver extends AnnotationDriverBase
+class AnnotationDriver extends \Doctrine\ORM\Mapping\Driver\AnnotationDriver
 {
     protected $trait_proxies_directory;
 

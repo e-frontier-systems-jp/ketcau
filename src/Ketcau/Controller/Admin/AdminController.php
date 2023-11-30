@@ -3,7 +3,9 @@
 namespace Ketcau\Controller\Admin;
 
 use Ketcau\Controller\AbstractController;
+use Ketcau\Entity\Member;
 use Ketcau\Repository\MemberRepository;
+use Ketcau\Repository\PageRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -29,12 +31,15 @@ class AdminController extends AbstractController
 //
 //    protected $productRepository;
 
+    private $pageRepository;
+
 
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,
         AuthenticationUtils $helper,
         MemberRepository $memberRepository,
         UserPasswordHasherInterface $passwordHasher,
+        PageRepository $pageRepository
     )
     {
         $this->authorizationChecker = $authorizationChecker;
@@ -42,6 +47,7 @@ class AdminController extends AbstractController
         $this->memberRepository = $memberRepository;
         $this->passwordHasher = $passwordHasher;
 
+        $this->pageRepository = $pageRepository;
     }
 
 
@@ -51,6 +57,8 @@ class AdminController extends AbstractController
      */
     public function index(Request $request)
     {
+        $pages = $this->pageRepository->findAll();
+
         return [];
     }
 }

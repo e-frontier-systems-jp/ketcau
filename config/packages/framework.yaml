@@ -13,6 +13,11 @@ framework:
         cookie_samesite: lax
         storage_factory_id: session.storage.factory.native
 
+    cache:
+        prefix_seed: ketcau
+
+    validation: { enable_annotations: true }
+
     #esi: true
     #fragments: true
     php_errors:

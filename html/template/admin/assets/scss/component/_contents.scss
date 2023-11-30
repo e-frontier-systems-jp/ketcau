@@ -5,18 +5,18 @@
   margin-left: 220px;
   background: $paleBlue;
 
-  &-cols {
+  .c-contents-cols {
     display: table;
     padding: 0 15px 60px;
     width: 100%;
   }
 
-  &-primary-col {
+  .c-contents-primary-col {
     display: table-cell;
     vertical-align: top;
   }
 
-  &-secondary-col {
+  .c-contents-secondary-col {
     display: table-cell;
     vertical-align: top;
     width: 350px;

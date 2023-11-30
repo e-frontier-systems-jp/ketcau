@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="ketcau-csrf-token" content="{{ csrf_token(constant('Ketcau\\Common\\Constant::TOKEN_NAME')) }}" />
-    <title></title>
+    <title>{{ block('sub_title') }} {{ block('title') }}</title>
     <link rel="stylesheet" href="/template/fontawesome/css/all.css" />
     {% block stylesheet %}
         <link rel="stylesheet" href="/assets/app.css" />
@@ -26,7 +26,13 @@
         <div class="c-main-nav-area">
             {{ include('@admin/nav.twig') }}
         </div>
-        <div class="c-contents-area">
+        <div class="c-curtain"></div>
+
+        <div class="c-contents">
+            <div class="c-page-titles">
+                <h2 class="c-page-titles-title">{{ block('title') }}</h2>
+                <span class="c-page-titles-sub-title">{{ block('sub_title') }}</span>
+            </div>
 
             <i class="fa fa-user"></i>
 
@@ -36,6 +42,7 @@
 
     {% block javascript %}
         <script src="/assets/app.js"></script>
+        <script src="/template/bootstrap/js/bootstrap.min.js"></script>
     {% endblock javascript %}
 </body>
 </html>

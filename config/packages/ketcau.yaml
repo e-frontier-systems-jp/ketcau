@@ -3,6 +3,8 @@ parameters:
   # default env parameters
   env(KETCAU_ADMIN_ROUTE): 'admin'
 
+  ketcau_database_url: '%env(DATABASE_URL)%'
+
   ketcau_admin_route: '%env(KETCAU_ADMIN_ROUTE)%'
 
   ketcau_theme_src_dir: '%kernel.project_dir%/src/Ketcau/Resource/template'
