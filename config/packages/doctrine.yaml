@@ -1,26 +1,42 @@
+parameters:
+
+    env(DATABASE_URL): 'pdo_mysql'
+    env(DATABASE_SERVER_VERSION): ~
+    env(DATABASE_CHARSET): 'utf8'
+
+
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
+        server_version: '%env(DATABASE_SERVER_VERSION)%'
+        charset: '%env(DATABASE_CHARSET)%'
+
+        default_table_options:
+            charset: 'utf8mb4'
+            collation: 'utf8mb4_bin'
+
+        url: '%env(DATABASE_URL)%'
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '15'
 
+        types:
+            datetime: 'Ketcau\Doctrine\DBAL\Types\UTCDateTimeType'
+            datetimetz: 'Ketcau\Doctrine\DBAL\Types\UTCDateTimeTzType'
+
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
-        auto_generate_proxy_classes: true
-        enable_lazy_ghost_objects: true
-        report_fields_where_declared: true
-        validate_xml_mapping: true
+        auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
-        mappings:
-            Ketcau:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Ketcau/Entity'
-                prefix: 'Ketcau\Entity'
-                alias: App
+#        mappings:
+#            Ketcau:
+#                is_bundle: false
+#                type: annotation
+#                dir: '%kernel.project_dir%/src/Ketcau/DoctrineMigrations'
+#                prefix: 'Ketcau\Entity'
+#                alias: App
+#        result_cache_driver: ~
 
 when@test:
     doctrine:

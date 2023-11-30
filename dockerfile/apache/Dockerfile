@@ -4,6 +4,8 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html
 
 RUN a2enmod deflate expires rewrite
 
+RUN apt update -y && apt upgrade -y
+
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
 
@@ -21,7 +23,9 @@ RUN install-php-extensions DOM
 RUN install-php-extensions zip
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN cd /tmp
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"

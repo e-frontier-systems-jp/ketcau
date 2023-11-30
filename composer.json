@@ -10,7 +10,8 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-zip": "*",
-        "doctrine/doctrine-bundle": "^2.10",
+        "doctrine/common": "^3.4",
+        "doctrine/doctrine-bundle": "*",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.16",
         "phpdocumentor/reflection-docblock": "^5.3",
@@ -59,15 +60,16 @@
     },
     "autoload": {
         "files": [
+            "src/Ketcau/Resource/functions/env.php",
             "src/Ketcau/Resource/functions/trans.php"
         ],
         "psr-4": {
-            "Ketcau\\Entity\\": "app/proxy/entity",
             "Ketcau\\": "src/Ketcau"
         }
     },
     "autoload-dev": {
         "psr-4": {
+            "Ketcau\\": "src/Ketcau",
             "Ketcau\\Tests\\": "tests/"
         }
     },
@@ -103,9 +105,11 @@
         "bin-dir": "bin",
         "src-dir": "src/Ketcau",
         "config-dir": "config",
-        "public-dir": "html"
+        "public-dir": "html",
+        "entity-dir": "src/Ketcau/Entity"
     },
     "require-dev": {
+        "doctrine/data-fixtures": "^1.7",
         "symfony/debug-bundle": "6.3.*",
         "symfony/maker-bundle": "^1.0",
         "symfony/stopwatch": "6.3.*",

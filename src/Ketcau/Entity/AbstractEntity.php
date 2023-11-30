@@ -3,16 +3,18 @@
 namespace Ketcau\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Proxy\Proxy;
 use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\NoopWordInflector;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\MappedSuperclass;
+use Doctrine\Persistence\Proxy;
 use Ketcau\DependencyInjection\Facade\AnnotationReaderFacade;
 use Ketcau\Util\StringUtil;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
+/** @MappedSuperclass() */
 abstract class AbstractEntity implements \ArrayAccess
 {
     #[\ReturnTypeWillChange]
@@ -38,7 +40,7 @@ abstract class AbstractEntity implements \ArrayAccess
         $inflector = new Inflector(new NoopWordInflector(), new NoopWordInflector());
         $method = $inflector->classify($offset);
 
-        if(method_exists($this, $method)) {
+        if (method_exists($this, $method)) {
             return $this->$method;
         } elseif (method_exists($this, "get$method")) {
             return $this->{"get$method"}();

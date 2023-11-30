@@ -1,6 +1,8 @@
+@import "library/variables";
 
 html, body {
   font-size: 14px;
+  background-color: $paleBlue !important;
 }
 
 ul {
@@ -29,3 +31,4 @@ a, button {
 @import 'component/container';
 @import 'component/main-navi';
 @import 'component/contents';
+@import 'component/page-title';

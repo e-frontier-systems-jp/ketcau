@@ -30,6 +30,13 @@ services:
         arguments:
           [ '@service_container' ]
 
+    Ketcau\Controller\:
+        resource: '../src/Ketcau/Controller'
+        tags: ['controller.service_arguments']
+
+    Symfony\Component\HttpFoundation\ParameterBag:
+
+    Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

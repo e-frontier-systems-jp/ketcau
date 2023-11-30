@@ -20,7 +20,7 @@ abstract class AbstractMasterEntity extends \ketcau\Entity\AbstractEntity
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="int", options={"unsigned": true})
+     * @ORM\Column(name="id", type="integer", options={"unsigned": true})
      * @ORM\Id()
      * @ORM\GeneratedValue()
      */
@@ -38,7 +38,7 @@ abstract class AbstractMasterEntity extends \ketcau\Entity\AbstractEntity
     /**
      * @var int
      *
-     * @ORM\Column(name="sort_no", type="int", options="{"unsigned": true})
+     * @ORM\Column(name="sort_no", type="integer", options={"unsigned": true})
      */
     protected int $sort_no;
 

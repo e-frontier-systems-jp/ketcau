@@ -44,6 +44,9 @@ class TwigInitializeListener implements EventSubscriberInterface
         $menus = [];
         $this->twig->addGlobal('menus', $menus);
 
+        $ketcauNav = $this->ketcauConfig['ketcau_nav'];
+        $this->twig->addGlobal('ketcauNav', $ketcauNav);
+
         $this->initialized = true;
     }
 
