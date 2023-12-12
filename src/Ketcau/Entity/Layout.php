@@ -100,7 +100,7 @@ if (!class_exists(Layout::class, false)) {
             $this->PageLayouts = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
-        public function getId(): int
+        public function getId(): int | null
         {
             return $this->id;
         }
@@ -144,12 +144,12 @@ if (!class_exists(Layout::class, false)) {
             return $this;
         }
 
-        public function getDeviceType(): Master\DeviceType
+        public function getDeviceType(): Master\DeviceType | null
         {
             return $this->DeviceType;
         }
 
-        public function setDeviceType(Master\DeviceType $DeviceType): Layout
+        public function setDeviceType(Master\DeviceType $DeviceType = null): Layout
         {
             $this->DeviceType = $DeviceType;
             return $this;
@@ -190,12 +190,69 @@ if (!class_exists(Layout::class, false)) {
         }
 
 
+        public function isDefault()
+        {
+            return in_array($this->id, [
+                self::DEFAULT_LAYOUT_PREVIEW_PAGE,
+                self::DEFAULT_LAYOUT_TOP_PAGE,
+                self::DEFAULT_LAYOUT_UNDERLAYER_PAGE,
+            ]);
+        }
+
+
+        public function getPages()
+        {
+            $Pages = [];
+            foreach ($this->PageLayouts as $PageLayout) {
+                $Pages[] = $PageLayout->getPage();
+            }
+            return $Pages;
+        }
+
+
         public function isDeletable(): bool
         {
             if (!$this->getPageLayouts()->isEmpty()) {
                 return false;
             }
             return true;
+        }
+
+
+        public function getBlocks($targetId = null) {
+            $TargetBlockPositions = [];
+
+            foreach ($this->BlockPositions as $BlockPosition) {
+                if (is_null($targetId)) {
+                    $TargetBlockPositions[] = $BlockPosition;
+                    continue;
+                }
+
+                if ($BlockPosition->getSection() == $targetId) {
+                    $TargetBlockPositions[] = $BlockPosition;
+                }
+            }
+
+            uasort($TargetBlockPositions, function (BlockPosition $a, BlockPosition $b) {
+                return ($a->getBlockRow() < $b->getBlockRow()) ? -1 : 1;
+            });
+
+            $TargetBlocks = [];
+            foreach ($TargetBlockPositions as $BlockPosition) {
+                $TargetBlocks[] = $BlockPosition->getBlock();
+            }
+
+            return $TargetBlocks;
+        }
+
+
+        public function getBlockPositionsByTargetId($targetId)
+        {
+            return $this->BlockPositions->filter(
+                function ($BlockPosition) use ($targetId) {
+                    return $BlockPosition->getSection() == $targetId;
+                }
+            );
         }
     }
 }

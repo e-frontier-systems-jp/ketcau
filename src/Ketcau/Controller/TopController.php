@@ -2,15 +2,15 @@
 
 namespace Ketcau\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TopController extends AbstractController
 {
     /**
      * @Route("/", name="homepage", methods={"GET"})
-     * @Template("index.twig")
      */
+    #[Template("@front/index.twig")]
     public function index(): array
     {
         return [];

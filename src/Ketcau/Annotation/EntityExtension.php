@@ -2,8 +2,13 @@
 
 namespace Ketcau\Annotation;
 
-use Doctrine\Common\Annotations\Annotation;
+use Attribute;
 
-class EntityExtension extends Annotation
+#[Attribute(Attribute::TARGET_CLASS)]
+final class EntityExtension
 {
+    public function __construct(
+        public string $value
+    )
+    {}
 }

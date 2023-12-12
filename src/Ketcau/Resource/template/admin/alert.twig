@@ -1,0 +1,40 @@
+
+{% for message in app.flashes('ketcau.admin.info') %}
+    <div class="alert alert-primary alert-dismissible fade show m-3" role="alert">
+        <i class="fa fa-comment fa-lg me-2"></i>
+        <span class="fw-bold">{{ message|trans }}</span>
+        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('ketcau.admin.success') %}
+    <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+        <i class="fa fa-check fa-lg me-2"></i>
+        <span class="fw-bold">{{ message|trans }}</span>
+        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('ketcau.admin.danger') %}
+    <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+        <i class="fa fa-warning fa-lg me-2"></i>
+        <span class="fw-bold">{{ message|trans }}</span>
+        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('ketcau.admin.error') %}
+    <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+        <i class="fa fa-warning fa-lg me-2"></i>
+        <span class="fw-bold">{{ message|trans }}</span>
+        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('ketcau.admin.warning') %}
+    <div class="alert alert-warning alert-dismissible fade show m-3" role="alert">
+        <i class="fa fa-warning fa-lg me-2"></i>
+        <span class="fw-bold">{{ message|trans }}</span>
+        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}

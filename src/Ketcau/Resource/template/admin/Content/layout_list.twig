@@ -5,6 +5,19 @@
 {% block title %}{{ 'admin.content.layout_management'|trans }}{% endblock %}
 {% block sub_title %}{{ 'admin.content.contents_management'|trans }}{% endblock %}
 
+{% block javascript %}
+    <script>
+        $(function() {
+            $('DeleteModal').on('shown.bs.modal', function (event) {
+                var target = $(event.relatedTarget);
+
+                $(this).find('[data-method="delete"]').attr('href', target.data('url'));
+
+                $(this).find('p.modal-message').text(target.data('message'));
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block main %}
     <div class="c-contents-cols">
@@ -12,10 +25,83 @@
 
             <div class="c-primary-col">
                 <div class="d-block mb-3">
-                    <a class="btn btn-primary" href="#">{{ 'admin.common.create_new'|trans }}</a>
+                    <a class="btn btn-primary" href="{{ url('admin_content_layout_new') }}">{{ 'admin.common.create_new'|trans }}</a>
                 </div>
-            </div>
 
+                {% for Layout in Layouts %}
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-8">
+                                    {% if Layout.DeviceType.id == constant('Ketcau\\Entity\\Master\\DeviceType::DEVICE_TYPE_PC') %}
+                                        {% set icon = 'fa-desktop' %}
+                                    {% else %}
+                                        {% set icon = 'fa-mobile' %}
+                                    {% endif %}
+                                    <i class="fa fa-fw {{ icon }} fa-lg me-2"></i>
+                                    <a class="card-title align-middle" href="{{ url('admin_content_layout_edit', { id: Layout.id }) }}">{{ Layout.name }}</a>
+                                </div>
+                                <div class="col-4 text-end">
+                                    {% if Layout.isDefault() == false %}
+                                        <button class="btn btn-kc-sub me-3" type="button" data-bs-toggle="modal" data-bs-target="#DeleteModal"
+                                                data-url="{{ url('admin_content_layout_delete', { id: Layout.id }) }}"
+                                                data-message="{{ 'admin.common.delete_modal_message'|trans({ '%name%': Layout.name }) }}">
+                                            <i class="fa fa-close fa-lg text-secondary" aria-hidden="true"></i>
+                                            {{ 'admin.content.layout_delete'|trans }}
+                                        </button>
+                                    {% endif %}
+                                    <a href="#layout-{{ Layout.id }}" data-bs-toggle="collapse" aria-expanded="false" aria-controls="layout-{{ Layout.id }}">
+                                        <i class="fa fa-angle-down fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if Layout.pages|length > 0 %}
+                            <div class="collapse kc-card-collapse" id="layout-{{ Layout.id }}">
+                                {% for Page in Layout.pages %}
+                                    <div class="card-body p-0">
+                                        <div class="row justify-content-between p-3">
+                                            <div class="col-3">
+                                                <a href="{{ url('admin_content_layout') }}">{{ Page.name }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="collapse kc-card-collapse" id="layout-{{ Layout.id }}">
+                                <div class="p-0 empty-item">
+                                    <div class="d-block p-3">
+                                        <span class="text-muted">{{ 'admin.content.layout_no_page'|trans }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">{{ 'admin.common.delete_model_title'|trans }}</h5>
+                                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="modal-message"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-kc-sub w-25" type="button" data-bs-dismiss="modal">{{ 'admin.common.cancel'|trans }}</button>
+                                <a href="#" class="btn btn-kc-delete" {{ csrf_token_for_anchor() }} data-method="delete" data-confirm="false">
+                                    {{ 'admin.common.delete'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 

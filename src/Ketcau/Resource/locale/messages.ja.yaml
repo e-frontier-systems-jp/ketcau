@@ -5,26 +5,28 @@
 
 
 
+common.name: お名前
+common.last_name: 姓
+common.first_name: 名
+common.kana: お名前(カナ)
+common.last_kana: セイ
+common.first_kana: メイ
+common.company_name: 会社名
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# flashメッセージ
+admin.common.delete_complete: 削除しました
 
 admin.home: ホーム
 
 admin.common.create_new: 新規作成
+admin.common.registration: 登録
+admin.common.required: 必須
+admin.common.device_type: 端末種別
+admin.common.delete: 削除
+
+admin.common.delete_model_title: 削除します
+admin.common.delete_modal_message: 'この操作はあとから取り消すことができません。「%name%」を削除してよろしいですか？'
 
 admin.customer.customer_management: 顧客管理
 
@@ -37,5 +39,37 @@ admin.product.product_management: 商品管理
 admin.product.product_list: 商品一覧
 admin.product.seller_master: 販売者一覧
 
+# 機能名称
 admin.content.contents_management: コンテンツ管理
 admin.content.layout_management: レイアウト管理
+admin.content.page_management: ページ管理
+admin.content.block_management: ブロック管理
+admin.content.cache_management: キャッシュ管理
+
+
+admin.content.cache_card_title: キャッシュ管理
+admin.content.cache_message: 本番環境にFTPなどでTwigファイルをアップロードして入れ替えた場合、画面を反映させるにはTwigキャッシュを削除する必要があります。
+admin.content.cache_delete: キャッシュ削除
+
+admin.content.layout_card_title: レイアウト概要
+admin.content.layout_delete: レイアウトを削除
+admin.content.layout_no_page: ページが登録されていません
+admin.content.layout_name: レイアウト名
+admin.content.layout_edit_card_title: レイアウト編集
+admin.content.layout_drag_and_drop_message: ブロックをドラッグ＆ドロップ
+
+admin.content.layout_section_head: <head></head>タグ内
+admin.content.layout_section_body_after: <body>タグ直後
+admin.content.layout_section_header: '#header'
+admin.content.layout_section_contents_top: '#contents_top'
+admin.content.layout_section_side_left: '#side_left'
+admin.content.layout_section_main_top: '#main_top'
+admin.content.layout_section_main: Main
+admin.content.layout_section_main_bottom: '#main_bottom'
+admin.content.layout_section_side_right: '#side_right'
+admin.content.layout_section_contents_bottom: '#contents_bottom'
+admin.content.layout_section_layout_section_footer: '#footer'
+admin.content.layout_section_footer: '#footer'
+admin.content.layout_section_drawer: '#drawer'
+admin.content.layout_section_close_body_before: '</body>タグ直前'
+admin.content.layout_section_unused: 未使用ブロック

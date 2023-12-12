@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="ketcau-csrf-token" content="{{ csrf_token(constant('Ketcau\\Common\\Constant::TOKEN_NAME')) }}" />
     <title></title>
-
+    <link rel="stylesheet" href="/bundle/front.bundle.css" />
+    <script src="/bundle/front.bundle.js"></script>
     {% block stylesheet %}{% endblock %}
     <script>
 
@@ -14,10 +15,21 @@
 <body id="page_{{ app.request.get('_route') }}" class="{{ body_class|default('other_page') }}">
 {# Layout: BODY_AFTER #}
 
-    <main>
-        {# MAIN AREA #}
-        {% block main %}{% endblock %}
-    </main>
+    <div class="kc-layout-role">
+
+        <div class="kc-layout-role-content-top">
+            kc-layout-role-content-top
+        </div>
+
+        <div class="kc-layout-role-contents">
+
+            <main>
+                {# MAIN AREA #}
+                {% block main %}{% endblock %}
+            </main>
+
+        </div>
+    </div>
 
 </body>
 </html>

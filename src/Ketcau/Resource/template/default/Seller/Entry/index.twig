@@ -1,0 +1,58 @@
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'seller_entry' %}
+
+{% block main %}
+    <div class="kc-register">
+        <div class="kc-page-header">
+            <h1>{{ 'front.seller.entry.title'|trans }}</h1>
+        </div>
+        <div class="kc-offset1-grid">
+            <div class="kc-offset1-cell">
+                <form method="post" action="{{ url('seller_entry') }}" novalidate class="h-ar">
+                    <span class="p-country-name" style="display: none;">Japan</span>
+                    {{ form_widget(form._token) }}
+                    <div class="kc-bordered-defs">
+                        <dl>
+                            <dt>{{ form_label(form.name, 'common.name', { 'label_attr': { 'class': 'kc-label' }}) }}</dt>
+                            <dd>
+                                <div class="kc-half-input{{ has_errors(form.name.name01, form.name.name02) ? ' error' }}">
+                                    {{ form_widget(form.name.name01, {'attr': { 'placeholder': 'common.last_name' }}) }}
+                                    {{ form_widget(form.name.name02, {'attr': { 'placeholder': 'common.first_name' }}) }}
+                                    {{ form_errors(form.name.name01) }}
+                                    {{ form_errors(form.name.name02) }}
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>{{ form_label(form.kana, 'common.kana', { 'label_attr': { 'class': 'kc-label' }}) }}</dt>
+                            <dd>
+                                <div class="kc-half-input"{{ has_errors(form.kana.kana01, form.kana.kana02) ? ' error' }}>
+                                    {{ form_widget(form.kana.kana01, {'attr': {'placeholder': 'common.last_kana'}}) }}
+                                    {{ form_widget(form.kana.kana02, {'attr': {'placeholder': 'common.first_kana'}}) }}
+                                    {{ form_errors(form.kana.kana01) }}
+                                    {{ form_errors(form.kana.kana02) }}
+                                </div>
+
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>{{ form_label(form.company_name, 'common.company_name', { 'label_attr': { class: 'kc-label' } }) }}</dt>
+                            <dd>
+                                <div class="kc-half-input{{ has_errors(form.company_name) ? ' error' }}">
+                                    {{ form_widget(form.company_name) }}
+                                    {{ form_errors(form.company_name) }}
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+{% endblock %}

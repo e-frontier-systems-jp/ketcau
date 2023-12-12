@@ -3,7 +3,7 @@ framework:
     translator:
         paths:
             - '%kernel.project_dir%/src/Ketcau/Resource/locale/'
-#        default_path: '%kernel.project_dir%/translations'
+            - '%kernel.project_dir%/app/Customize/Resource/locale'
         fallbacks:
             - '%locale%'
 #        providers:

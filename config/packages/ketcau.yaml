@@ -2,11 +2,37 @@ parameters:
 
   # default env parameters
   env(KETCAU_ADMIN_ROUTE): 'admin'
+  env(KETCAU_FORCE_SSL): '0'
+  env(KETCAU_TEMPLATE_CODE): 'default'
+  env(KETCAU_AUTH_MAGIC): '<change.me>'
+  env(KETCAU_COOKIE_NAME): 'ketcau'
+  env(KETCAU_COOKIE_PATH): '/'
+  env(KETCAU_COOKIE_LIFETIME): '0'
+  env(KETCAU_GC_MAXLIFETIME): '1440'
+  env(KETCAU_MAINTENANCE_FILE_PATH): '%kernel.project_dir%/.maintenance'
 
   ketcau_database_url: '%env(DATABASE_URL)%'
-
+  ketcau.theme: '%env(KETCAU_TEMPLATE_CODE)%'
+  ketcau_theme_code: '%ketcau.theme%'
+  ketcau_auth_magic: '%env(KETCAU_AUTH_MAGIC)%'
+  ketcau_auth_type: HMAC
+  ketcau_password_hash_algos: SHA256
   ketcau_admin_route: '%env(KETCAU_ADMIN_ROUTE)%'
-
+  ketcau_force_ssl: '%env(bool:KETCAU_FORCE_SSL)%'
+  ketcau_theme_app_dir: '%kernel.project_dir%/app/template'
   ketcau_theme_src_dir: '%kernel.project_dir%/src/Ketcau/Resource/template'
+  ketcau_theme_user_data_dir: '%ketcau_theme_app_dir%/user_data'
+  ketcau_theme_front_dir: '%ketcau_theme_app_dir%/%ketcau.theme%'
   ketcau_theme_front_default_dir: '%ketcau_theme_src_dir%/default'
+  ketcau_theme_admin_dir: '%ketcau_theme_app_dir%/admin'
   ketcau_theme_admin_default_dir: '%ketcau_theme_src_dir%/admin'
+  ketcau_content_maintenance_file_path: '%env(KETCAU_MAINTENANCE_FILE_PATH)%'
+  ketcau_composer_memory_limit: 1536M
+  plugin_realdir: '$kernel.project_dir%/app/Plugin'
+  ketcau_name_len: 16
+  ketcau_kana_len: 25
+  ketcau_address1_len: 32
+  ketcau_address2_len: 32
+  ketcau_tel_len_max: 14
+  ketcau_postal_code: 8
+  ketcau_stext_len: 255

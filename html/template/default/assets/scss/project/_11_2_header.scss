@@ -1,0 +1,52 @@
+@import '../mixins/media';
+
+.kc-layout-role {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  transition: transform 0.3s;
+  background: #ffffff;
+
+  & &-content-top {
+    padding: 0;
+  }
+
+  & &-contents {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    max-width: 1150px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+  }
+
+  & &-main {
+    width: 100%;
+  }
+
+  & &-main-with-column {
+    width: 100%;
+    @include media-desktop() {
+      width: 75%;
+    }
+  }
+
+  & &-main-between-column {
+    width: 100%;
+    @include media-desktop() {
+      width: 50%;
+    }
+  }
+
+  & &-left,
+  & &-right {
+    display: none;
+    @include media-desktop() {
+      display: block;
+      width: 25%;
+    }
+  }
+}
