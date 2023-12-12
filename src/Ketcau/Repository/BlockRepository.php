@@ -11,4 +11,16 @@ class BlockRepository extends AbstractRepository
     {
         parent::__construct($registry, Block::class);
     }
+
+
+
+    public function getUnusedBlocks($Blocks)
+    {
+        return $this->createQueryBuilder('b')
+            ->select('b')
+            ->where('b not in (:blocks)')
+            ->setParameter('blocks', $Blocks)
+            ->getQuery()
+            ->getResult();
+    }
 }

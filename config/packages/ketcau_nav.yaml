@@ -33,3 +33,12 @@ parameters:
         layout:
           name: admin.content.layout_management
           url: admin_content_layout
+        page:
+          name: admin.content.page_management
+          url: admin_content_page
+        block:
+          name: admin.content.block_management
+          url: admin_content_block
+        cache:
+          name: admin.content.cache_management
+          url: admin_content_cache

@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    container.dumper.inline_class_loader: true
+    .container.dumper.inline_class_loader: true
 
     env(KETCAU_LOCALE): 'ja'
     env(KETCAU_TIMEZONE): 'Asia/Tokyo'
@@ -24,19 +24,76 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     Ketcau\:
         resource: '../src/Ketcau'
-        exclude: '../src/Ketcau/{Annotation,Common,Entity,Exception,Log,Plugin,ServiceProvider,Resource,Doctrine/ORM/tools/}'
+        exclude: '../src/Ketcau/{Annotation,Common,DataFixtures,Entity,Exception,Log,Plugin,ServiceProvider,Resource,Doctrine/ORM/tools/}'
 
     Ketcau\Common\KetcauConfig:
-        arguments:
-          [ '@service_container' ]
+        public: true
+
+    Ketcau\Service\SystemService:
+        lazy: true
+        public: true
+
+    Ketcau\Service\Composer\ComposerServiceInterface:
+        factory: ['Ketcau\Service\Composer\ComposerServiceFactory', createService]
+
+    Ketcau\Service\Composer\ComposerApiService:
+        lazy: true
+        public: true
+
+    Ketcau\Repository\PluginRepository:
+        lazy: true
+        public: true
+
+    Ketcau\Service\PluginService:
+        lazy: true
+        public: true
 
     Ketcau\Controller\:
         resource: '../src/Ketcau/Controller'
         tags: ['controller.service_arguments']
 
+    Plugin\:
+        resource: '../app/Plugin/*'
+        exclude: '../app/Plugin/*/{Entity,Resource,ServiceProvider,Tests,Codeception,DoctrineMigrations}'
+
+    Customize\:
+        resource: '../app/Customize/*'
+        exclude: '../app/Customize/{Entity,Resource,Tests}'
+
+    Customize\Controller\:
+        resource: '../app/Customize/Controller'
+        tags: ['controller.service_arguments']
+
+    twig.extension.stringloader:
+        class: Twig\Extension\StringLoaderExtension
+        tags: ['twig.extension']
+
+    ketcau.collector.core:
+        class: Ketcau\DataCollector\KetcauDataCollector
+        tags:
+            - { name: 'data_collector', template: '@toolbar/ketcau.html.twig', id: 'ketcau_core', priority: -512 }
+
     Symfony\Component\HttpFoundation\ParameterBag:
 
+    ketcau.logger:
+        class: Ketcau\Log\Logger
+        arguments:
+            - '@Ketcau\Request\Context'
+            - '@monolog.logger'
+            - '@monolog.logger.front'
+            - '@monolog.logger.admin'
+        lazy: true
+        public: true
+
     Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
+
+    native_file_session_handler:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler
+        arguments:
+            - '%session.save_path%'
+
+    Ketcau\DependencyInjection\Facade\AnnotationReaderFacade:
+        public: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

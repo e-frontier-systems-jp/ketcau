@@ -6,9 +6,6 @@ volumes:
 
 services:
   ketcau:
-    depends_on:
-      mariadb:
-        condition: service_healthy
     environment:
       DATABASE_URL: "mysql://ketcau:KETCAU@mariadb/ketcau"
       DATABASE_SERVER_VERSION: 5.7
@@ -32,3 +29,13 @@ services:
       interval: 3s
       timeout: 3s
       retries: 3
+
+  phpMyAdmin:
+    image: phpmyadmin
+    environment:
+      PMA_HOST: mariadb
+    networks:
+      - backend
+    ports:
+      - "8080:80"
+

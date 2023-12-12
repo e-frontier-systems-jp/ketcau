@@ -1,0 +1,37 @@
+@import "../library/variables";
+
+@import "../../../../../../node_modules/bootstrap/scss/bootstrap";
+
+
+.btn-ec-conversion {
+  @include button-variant(#437EC4, transparent, #FFF, #2963AB, transparent, #FFF, #2963AB, transparent);
+  &:disabled {
+    color: #fff;
+  }
+  cursor: pointer;
+}
+
+
+.border-kc-gray {
+  border-color: #cccccc !important;
+}
+
+.border-kc-dashed {
+  border: $border-width dashed #cccccc !important;
+}
+
+.bg-kc-light-gray {
+  background-color: #f9f9f9 !important;
+}
+
+.bg-kc-form-gray {
+  background-color: #f8f9fa !important;
+}
+
+.text-kc-gray {
+  color: #999999 !important;
+}
+
+.text-kc-light-gray {
+  color: #cccccc !important;
+}

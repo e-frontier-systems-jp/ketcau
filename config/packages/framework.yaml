@@ -1,30 +1,47 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
-    secret: '%env(APP_SECRET)%'
-    #csrf_protection: true
-    http_method_override: false
+    secret: '%env(KETCAU_AUTH_MAGIC)%'
+    default_locale: '%locale%'
     handle_all_throwables: true
+    translator:
+        fallback: ['%locale%']
+    csrf_protection: { enabled: true }
+    http_method_override: true
+    trusted_hosts: ~
 
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
     # Remove or comment this section to explicitly disable session support.
     session:
-        handler_id: null
-        cookie_secure: auto
-        cookie_samesite: lax
-        storage_factory_id: session.storage.factory.native
+#        handler_id: 'Ketcau\Session\Storage\Handler\SameSiteNoneCompatSessionHandler'
+        save_path: '%kernel.project_dir%/var/session/%kernel.environment%'
+        name: '%env(KETCAU_COOKIE_NAME)%'
+        cookie_lifetime: '%env(KETCAU_COOKIE_LIFETIME)%'
+        gc_maxlifetime: '%env(KETCAU_GC_MAXLIFETIME)%'
+        cookie_httponly: true
 
-    cache:
-        prefix_seed: ketcau
-
-    validation: { enable_annotations: true }
-
-    #esi: true
-    #fragments: true
+    esi: { enabled: true }
+    fragments: { enabled: true }
     php_errors:
         log: true
+    assets:
+        base_path: '/html/template/%ketcau.theme%'
+        packages:
+            admin:
+                base_path: '/html/template/admin'
+            save_image:
+                base_path: '/html/upload/save_image'
+            plugin:
+                base_path: '/html/plugin'
+            install:
+                base_path: '/html/template/install'
+            temp_image:
+                base_path: '/html/upload/temp_image'
+            user_data:
+                base_path: '/html/user_data'
+            bundle:
+                base_path: '/html/bundle'
+    cache:
+        prefix_seed: ketcau
+    ide: ~
+    validation: { enable_annotations: true }
 
-when@test:
-    framework:
-        test: true
-        session:
-            storage_factory_id: session.storage.factory.mock_file

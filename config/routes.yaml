@@ -1,5 +1,6 @@
 controllers:
-    resource:
-        path: ../src/Ketcau/Controller/
-        namespace: Ketcau\Controller
-    type: attribute
+    resource: ../src/Ketcau/Controller/
+    type: annotation
+customize_controllers:
+    resource: ../app/Customize/Controller
+    type: annotation

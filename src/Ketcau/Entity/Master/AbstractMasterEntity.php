@@ -22,7 +22,7 @@ abstract class AbstractMasterEntity extends \ketcau\Entity\AbstractEntity
      *
      * @ORM\Column(name="id", type="integer", options={"unsigned": true})
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     protected int $id;
 

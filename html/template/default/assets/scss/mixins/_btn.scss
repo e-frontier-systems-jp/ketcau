@@ -1,0 +1,76 @@
+@import "../mixins/projects";
+@import "variables";
+
+$padding-base-vertical: 6px !default;
+$padding-base-horizontal: 12px !default;
+
+$btn-primary-bg: #5cb1b1;
+$btn-primary-color: #ffffff;
+
+$btn-action-bg: #de5d50;
+$btn-action-color: #ffffff;
+
+$btn-cancel-bg: #525263;
+$btn-cancel-color: #ffffff;
+
+$btn-default-bg: #f5f7f8;
+$btn-default-color: #525263;
+$btn-default-border: #cccccc !default;
+
+$btn-border-radius-base: 0px;
+$cursor-disabled: not-allowed !default;
+
+@mixin _btn($color, $background, $border) {
+  display: inline;
+  margin-bottom: 0;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px;
+  white-space: nowrap;
+  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base);
+  @include user-select(none);
+  padding: 10px 16px;
+  text-decoration: none;
+
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      @include tab-focus;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.focus {
+    color: $btn-default-color;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: $cursor-disabled;
+    @include opacity(.65);
+    @include box-shadow(none);
+  }
+
+  @include button-variant($background, $border, $color, $disabled-color: $color);
+
+  .kc-icon img {
+    width: 1em;
+    vertical-align: text-bottom;
+  }
+}

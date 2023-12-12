@@ -3,10 +3,9 @@
 namespace Ketcau\Controller\Admin;
 
 use Ketcau\Controller\AbstractController;
-use Ketcau\Entity\Member;
 use Ketcau\Repository\MemberRepository;
 use Ketcau\Repository\PageRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,8 +52,8 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/%ketcau_admin_route%/", name="admin_homepage", methods={"GET"})
-     * @Template("@admin/index.twig")
      */
+    #[Template("@admin/index.twig")]
     public function index(Request $request)
     {
         $pages = $this->pageRepository->findAll();

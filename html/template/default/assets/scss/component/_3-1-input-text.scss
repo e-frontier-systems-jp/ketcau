@@ -1,0 +1,168 @@
+@import "../mixins/media";
+
+
+.kc-input {
+  @include forms-reset;
+  @include form-controls;
+
+  input {
+    height: 40px;
+    margin-bottom: 10px;
+    @include media-desktop {
+      margin-bottom: 16px;
+    }
+  }
+
+  textarea {
+    height: auto;
+    min-height: 100px;
+  }
+
+  p {
+    line-height: 1.4;
+  }
+
+  .kc-error-message {
+    margin-bottom: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $clear-red;
+  }
+}
+
+.error.kc-input {
+  input, select, textarea {
+    margin-bottom: 5px;
+    border-color: #cf3f34;
+    background: #fdf1f0;
+  }
+}
+
+.kc-checkbox, .kc-radio {
+  .kc-error-message {
+    margin-bottom: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $clear-red;
+  }
+}
+
+.error.kc-checkbox, .error.kc-radio {
+  input, label, div {
+    border-color: #cf3f34;
+    background: #fdf1f0;
+  }
+}
+
+
+
+.kc-half-input {
+  @extend .kc-input;
+  input[type='text'] {
+    display: inline-block;
+    width: 47%;
+    margin-left: 2%;
+    @include media-desktop {
+      margin-left: 15px;
+      width: 45%;;
+    }
+  }
+
+  .kc-error-message {
+    display: inline-block;
+    width: 47%;
+    @include media-desktop {
+      margin-left: 15px;
+      width: 45%;
+    }
+  }
+
+  input[type='text'],
+  .kc-error-message {
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
+}
+
+
+.kc-number-input {
+  @extend .kc-input;
+  input[type='number'] {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    text-align: right;
+  }
+}
+
+
+.kc-zip-input {
+  @extend .kc-input;
+  display: inline-block;
+  input {
+    display: inline-block;
+    text-align: left;
+    width: auto;
+    max-width: 9em;
+    font-size: 16px;
+  }
+  span {
+    display: inline-block;
+    padding: 0 5px 0 3px;
+    margin-left: 5px;
+  }
+}
+
+
+.kc-zip-input-help {
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 16px;
+  vertical-align: baseline;
+  line-height: 0;
+
+  .kc-zip-input-help-icon {
+    display: inline-block;
+    margin-top: -10px;
+    width: 20px;
+    height: 20px;
+    background: #525263;
+    border-radius: 50%;
+    font-size: 13px;
+    position: relative;
+    top: -6px;
+
+    .kc-icon img {
+      width: 1em;
+      height: 1em;
+      position: relative;
+      left: 3px;
+      top: 3px;
+    }
+  }
+
+  span {
+    margin-left: 8px;
+    display: inline-block;
+    color: #0092c4;
+    vertical-align: 3px;
+  }
+}
+
+
+.kc-zip-auto {
+  margin-bottom: 16px;
+  .kc-inline-btn {
+    font-weight: normal;
+  }
+}
+
+
+.kc-tel-input {
+  @extend .kc-input;
+  input {
+    max-width: 12em;
+    text-align: left;
+  }
+}

@@ -27,8 +27,11 @@ a, button {
 }
 
 
+@import 'component/bootstrap';
 @import 'component/header-bar';
 @import 'component/container';
 @import 'component/main-navi';
 @import 'component/contents';
 @import 'component/page-title';
+@import 'component/conversion';
+

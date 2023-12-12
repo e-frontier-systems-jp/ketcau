@@ -1,0 +1,71 @@
+@import '../library/variables';
+
+.c-conversion {
+  width: calc(100% - 220px);
+  height: 60px;
+  background: rgba(47, 63, 78, .8);
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  z-index: 100;
+
+  .c-conversion-container {
+    display: table;
+    padding: 0 25px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .c-conversion-left-block {
+    display: table;
+    float: left;
+    height: 60px;
+  }
+
+  .c-conversion-left-block-item {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    height: 60px;
+    .c-conversion-left-block-item:not(:last-of-type) {
+      padding-right: 30px;
+    }
+  }
+
+  > .c-conversion-right-block {
+    display: table;
+    float: right;
+    height: 60px;
+    .c-conversion-right-block-item:not(:last-of-type) {
+      padding-right: 30px;
+    }
+  }
+
+  > .c-conversion-right-block-item {
+    display: table-cell;
+    height: 60px;
+    vertical-align: middle;
+  }
+
+  > .c-conversion-secondary-col {
+    display: table-cell;
+    width: 350px;
+    vertical-align: top;
+  }
+}
+
+.c-base-link {
+  display: inline-block;
+  font-size: 16px;
+  color: $white;
+  &:hover {
+    color: $white;
+    opacity: .5;
+    text-decoration: none;
+  }
+  i {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
