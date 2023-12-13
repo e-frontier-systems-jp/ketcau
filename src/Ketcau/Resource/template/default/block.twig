@@ -1,0 +1,7 @@
+{% for Block in Blocks %}
+    {% if Block.use_controller %}
+        {{ render(path('block_' ~ Block.file_name)) }}
+    {% else %}
+        {{ include_dispatch('Block/' ~ Block.file_name ~ '.twig') }}
+    {% endif %}
+{% endfor %}

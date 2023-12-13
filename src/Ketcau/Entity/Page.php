@@ -15,6 +15,12 @@ if (!class_exists(Page::class, false)) {
      */
     class Page extends \Ketcau\Entity\AbstractEntity
     {
+        public const EDIT_TYPE_USER = 0;
+        public const EDIT_TYPE_PREVIEW = 1;
+        public const EDIT_TYPE_DEFAULT = 2;
+        public const EDIT_TYPE_DEFAULT_CONFIRM = 3;
+
+
 
         /**
          * @var integer

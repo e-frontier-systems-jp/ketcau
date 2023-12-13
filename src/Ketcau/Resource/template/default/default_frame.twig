@@ -16,6 +16,12 @@
 {# Layout: BODY_AFTER #}
 
     <div class="kc-layout-role">
+        {# Layout: HEADER #}
+        {% if Layout.Header %}
+            <header class="kc-layout-role-header">
+                {{ include('block.twig', { 'Blocks': Layout.Header }) }}
+            </header>
+        {% endif %}
 
         <div class="kc-layout-role-content-top">
             kc-layout-role-content-top

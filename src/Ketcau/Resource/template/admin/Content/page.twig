@@ -1,0 +1,116 @@
+{% extends '@admin/default_frame.twig' %}
+{% set menus = [ 'content', 'page' ] %}
+
+{% block title %}{{ 'admin.content.page_management'|trans }}{% endblock %}
+{% block sub_title %}{{ 'admin.content.contents_management'|trans }}{% endblock %}
+
+
+
+{% block main %}
+    <div class="c-contents-cols">
+        <div class="c-contents-primary-col">
+            <div>
+                <div class="row justify-content-between mb-2">
+                    <div class="col-9">
+                        <a class="btn btn-kc-regular" href="{{ url('admin_content_page_new') }}">
+                            {{ 'admin.common.create_new'|trans }}
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-text">
+                                        <span id="basic-addon1"><i class="fa fa-search"></i></span>
+                                    </div>
+                                    <input id="search-page" class="form-control" type="search" aria-label="Search" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card rounded border-0 mb-4">
+                    <div class="card-body p-0">
+                        <table class="table table-sm">
+                            <thead class="border-bottom">
+                                <tr>
+                                    <th class="border-0 pt-2 pb-2 ps-3">{{ 'admin.content.page_name'|trans }}</th>
+                                    <th class="border-0 pt-2 pb-2 ps-3">{{ 'admin.content.page_route_name'|trans }}</th>
+                                    <th class="border-0 pt-2 pb-2 ps-3">{{ 'admin.content.page_url'|trans }}</th>
+                                    <th class="border-0 pt-2 pb-2 ps-3">{{ 'admin.content.page_file_name'|trans }}</th>
+                                    <th class="border-0 pt-2 pb-2 ps-3">{{ 'admin.content.layout_name'|trans }}</th>
+                                    <th class="border-0 pt-2 pb-2 pe-3"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for Page in Pages %}
+                                <tr id="ex-page-{{ Page.id }}">
+                                    <td class="align-middle ps-3">
+                                        <a href="{{ url('admin_content_page_edit', { id: Page.id }) }}">{{ Page.name }}</a>
+                                    </td>
+                                    <td class="align-middle ps-3 text-break">
+                                        {{ Page.url }}
+                                    </td>
+                                    <td class="align-middle ps-3 text-break">
+                                        {% if router.routecollection.get(Page.url) %}
+                                            {{ router.routecollection.get(Page.url).path }}
+                                        {% else %}
+                                            {{ Page.url }}
+                                        {% endif %}
+                                    </td>
+                                    <td class="align-middle ps-3 text-break">
+                                        {% if Page.file_name %}{{ Page.file_name }}.twig{% endif %}
+                                    </td>
+                                    <td class="align-middle{{ Page.layouts|length < 2 ? ' pb-4' }} ps-3 text-nowrap">
+                                        {% for Layout in Page.Layouts %}
+                                            {% if Layout.device_type.id == constant('Ketcau\\Entity\\Master\\DeviceType::DEVICE_TYPE_PC') %}
+                                                {% set icon = 'fa-desktop' %}
+                                            {% else %}
+                                                {% set icon = 'fa-mobile fa-2x' %}
+                                            {% endif %}
+                                            <div class="d-block">
+                                                <i class="fa {{ icon }} me-2"></i>
+                                                <span>{{ Layout.name }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    </td>
+                                    <td class="align-middle me-3">
+                                        <div class="row justify-content-end">
+                                            {% if Page.edit_type == constant('Ketcau\\Entity\\Page::EDIT_TYPE_USER') %}
+                                                <div class="col-auto text-center" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ 'admin.common.delete'|trans }}">
+                                                    <a class="btn btn-kc-action-icon" data-bs-toggle="modal" data-bs-target="#delete_{{ Page.id }}">
+                                                        <i class="fa fa-close fa-lg text-secondary" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="modal fade" id="delete_{{ Page.id }}" tabindex="-1" role="dialog"
+                                                     aria-labelledby="delete_{{ Page.id }}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title fw-bold">{{ 'admin.common.delete_modal_title'|trans }}</h5>
+                                                                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body text-start">
+                                                                <p class="text-start">{{ 'admin.common.delete_modal_message'|trans({ '%name%': Page.name }) }}</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-kc-sub" type="button" data-bs-dismiss="modal">{{ 'admin.common.cancel'|trans }}</button>
+                                                                <a class="btn btn-kc-delete" href="{{ url('admin_content_page_delete', { 'id': Page.id }) }}"
+                                                                   {{ csrf_token_for_anchor() }} data-method="delete" data-confirm="false">{{ 'admin.common.delete'|trans }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -11,6 +11,8 @@ parameters:
   env(KETCAU_GC_MAXLIFETIME): '1440'
   env(KETCAU_MAINTENANCE_FILE_PATH): '%kernel.project_dir%/.maintenance'
 
+  env(TRUSTED_PROXIES): '127.0.0.1,REMOTE_ADDR'
+
   ketcau_database_url: '%env(DATABASE_URL)%'
   ketcau.theme: '%env(KETCAU_TEMPLATE_CODE)%'
   ketcau_theme_code: '%ketcau.theme%'
@@ -36,3 +38,4 @@ parameters:
   ketcau_tel_len_max: 14
   ketcau_postal_code: 8
   ketcau_stext_len: 255
+  ketcau_ltext_len: 3000

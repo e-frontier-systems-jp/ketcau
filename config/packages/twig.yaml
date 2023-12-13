@@ -6,7 +6,10 @@ twig:
         event_dispatcher: '@event_dispatcher'
     paths:
         '%ketcau_theme_front_default_dir%': ~
+        '%ketcau_theme_admin_dir%': admin
         '%ketcau_theme_admin_default_dir%': admin
+        '%ketcau_theme_src_dir%/toolbar': toolbar
+        '%ketcau_theme_src_dir%/common': common
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     form_themes: ['bootstrap_5_layout.html.twig']
@@ -14,7 +17,4 @@ twig:
     date:
         timezone: '%timezone%'
     base_template_class: 'Ketcau\Twig\Template'
-
-when@test:
-    twig:
-        strict_variables: true
+    exception_controller: null

@@ -13,11 +13,16 @@ common.last_kana: セイ
 common.first_kana: メイ
 common.company_name: 会社名
 
+common.delete_confirm: 削除してもよろしいですか？
+
+admin.common.restrict_file_upload_info: 'この機能の利用頻度が低い場合、使用しない間は無効化することでセキュリティを更に向上させることができます。環境変数 KETCAU_RESTRICT_FILE_UPLOAD を 1 に設定することで機能を無効化することが可能です。'
 
 # flashメッセージ
 admin.common.delete_complete: 削除しました
 
 admin.home: ホーム
+
+admin.error.go_to_login: ログイン画面へ
 
 admin.common.create_new: 新規作成
 admin.common.registration: 登録
@@ -45,12 +50,14 @@ admin.content.layout_management: レイアウト管理
 admin.content.page_management: ページ管理
 admin.content.block_management: ブロック管理
 admin.content.cache_management: キャッシュ管理
+admin.content.maintenance_management: メンテナンス管理
 
-
+# キャッシュ管理
 admin.content.cache_card_title: キャッシュ管理
 admin.content.cache_message: 本番環境にFTPなどでTwigファイルをアップロードして入れ替えた場合、画面を反映させるにはTwigキャッシュを削除する必要があります。
 admin.content.cache_delete: キャッシュ削除
 
+# レイアウト管理
 admin.content.layout_card_title: レイアウト概要
 admin.content.layout_delete: レイアウトを削除
 admin.content.layout_no_page: ページが登録されていません
@@ -73,3 +80,49 @@ admin.content.layout_section_footer: '#footer'
 admin.content.layout_section_drawer: '#drawer'
 admin.content.layout_section_close_body_before: '</body>タグ直前'
 admin.content.layout_section_unused: 未使用ブロック
+
+# ページ管理
+admin.content.page_card_title: ページ管理
+admin.content.page_name: ページ名
+admin.content.page_route_name: ルーティング名
+admin.content.page_url: URL
+admin.content.page_file_name: ファイル名
+admin.content.page_url_exists: 既にURLが存在しています。
+admin.content.page_file_name_exists: 同じファイル名のデータが存在しています。別のファイル名を入力してください。
+admin.content.page_source_code: コード
+
+# メンテナンス管理
+admin.content.maintenance_card_title: メンテナンスモード
+admin.content.maintenance_message: |
+  メンテナンスモードを有効にすると、サイトの機能を一時的に停止し、管理画面のみアクセス可能な状態となります。
+  ※プラグインのインストール/有効化/無効化/削除時には、自動的にメンテナンスモードに切り替わります。
+admin.content.maintenance_switch_on: 有効にする
+admin.content.maintenance_switch_off: 無効にする
+admin.content.maintenance_switch_on_message: メンテナンスモードを有効にしました。
+admin.content.maintenance_switch_off_message: メンテナンスモードを無効にしました。
+
+
+# 機能名称
+admin.setting: 設定
+admin.setting.system: システム設定
+admin.setting.system.system_info: システム情報
+
+
+# システム情報
+admin.setting.system.system.ketcau: KETCAU Core
+admin.setting.system.system.server_os: サーバーOS
+admin.setting.system.system.database_server: DBサーバー
+admin.setting.system.system.web_server: WEBサーバー
+admin.setting.system.system.php: PHP
+admin.setting.system.system.user_agent: User Agent
+admin.setting.system.system.php_info: PHP情報
+
+# エラー画面
+exception.error_title: システムエラーが発生しました。
+exception.error_message: 大変お手数ですが、サイト管理者までご連絡ください。
+exception.error_title_can_not_access: アクセスできません。
+exception.error_message_can_not_access: お探しのページはアクセスができない状況にあるか、移動もしくは削除された可能性があります。
+exception.error_title_not_found: ページがみつかりません。
+exception.error_message_not_found: URLに間違いがないかご確認ください。
+exception.error_message_restrict_url: この機能は管理者によって制限されています。
+exception.error_message_rate_limit: 試行回数の上限を超過しました。しばらくお待ちいただき、再度お試しください。

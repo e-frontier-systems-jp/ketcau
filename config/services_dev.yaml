@@ -1,2 +1,5 @@
 services:
-    Symfony\Component\HttpKernel\Profiler\Profiler: '@profiler'
+    Ketcau\EventListener\ExceptionListener:
+        autoconfigure: false
+        arguments:
+          [ '@twig', '@Ketcau\Request\Context' ]

@@ -141,7 +141,7 @@ if (!class_exists(Seller::class, false)) {
         /**
          * @var \Ketcau\Entity\Master\Pref
          * @ORM\ManyToOne(targetEntity="Ketcau\Entity\Master\Pref")
-         * @ORM\JoinCOlumns({
+         * @ORM\JoinColumns({
          *     @ORM\JoinColumn(name="pref_id", referencedColumnName="id")
          * })
          */
