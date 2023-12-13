@@ -17,13 +17,10 @@ class Template extends \Twig\Template
             $originCode = $this->env->getLoader()->getSourceContext($this->getTemplateName())->getCode();
             // TODO:
         }
-
-        parent::display($context, $blocks);
     }
 
     public function getTemplateName()
     {
-        return '';
     }
 
     public function getDebugInfo()

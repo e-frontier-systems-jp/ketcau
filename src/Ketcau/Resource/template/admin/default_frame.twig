@@ -7,8 +7,8 @@
     <title>{{ block('sub_title') }} {{ block('title') }}</title>
     <link rel="stylesheet" href="/template/fontawesome/css/all.css" />
     <script src="/bundle/admin.bundle.js"></script>
+    <link rel="stylesheet" href="/bundle/admin.bundle.css" />
     {% block stylesheet %}
-        <link rel="stylesheet" href="/bundle/admin.bundle.css" />
     {% endblock stylesheet %}
 </head>
 <body id="page_{{ app.request.get('_route') }}">
@@ -40,9 +40,9 @@
         </div>
     </div>
 
+    <script src="{{ asset('assets/js/function.js', 'admin') }}"></script>
     {% block javascript %}
-        <script src="/assets/app.js"></script>
-        <script src="/template/bootstrap/js/bootstrap.min.js"></script>
     {% endblock javascript %}
+
 </body>
 </html>

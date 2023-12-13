@@ -36,10 +36,9 @@
     position: relative;
     text-decoration: none;
 
-
-    &::after {
-      display: inline;
-      content: '';
+    &[data-bs-toggle='collapse']::after
+    {
+      display: inline-block;
       width: 16px;
       height: 16px;
       text-align: right;
@@ -50,14 +49,10 @@
       position: absolute;
       top: 7px;
       right: 15px;
-    }
-
-    &.collapsed::after
-    {
       content: "\f106";
     }
 
-    &[data-bs-toggle='collapse']::after
+    &[data-bs-toggle='collapse'].collapsed::after
     {
       content: '\f107';
     }

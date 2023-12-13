@@ -68,6 +68,18 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v6.3.0"
     },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "efb318193e48384eb5c5aadff15396ed698f8ffc"
+        },
+        "files": [
+            "html/.htaccess"
+        ]
+    },
     "symfony/console": {
         "version": "6.3",
         "recipe": {

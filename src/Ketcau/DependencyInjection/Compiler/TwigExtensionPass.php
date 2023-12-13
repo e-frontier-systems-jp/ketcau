@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class TwigExtensionPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->getParameter('kernel.debug')) {
             $definition = $container->getDefinition('twig');

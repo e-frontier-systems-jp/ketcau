@@ -2,6 +2,8 @@
 
 namespace Ketcau\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 if (!class_exists(Layout::class, false)) {
@@ -72,13 +74,13 @@ if (!class_exists(Layout::class, false)) {
         private $update_date;
 
         /**
-         * @var \Doctrine\Common\Collections\Collection
+         * @var Collection
          * @ORM\OneToMany(targetEntity="Ketcau\Entity\BlockPosition", mappedBy="Layout", cascade={"persist", "remove"})
          */
         private $BlockPositions;
 
         /**
-         * @var \Doctrine\Common\Collections\Collection
+         * @var Collection
          * @ORM\OneToMany(targetEntity="Ketcau\Entity\PageLayout", mappedBy="Layout", cascade={"persist", "remove"})
          * @ORM\OrderBy({"sort_no" = "ASC"})
          */
@@ -96,8 +98,8 @@ if (!class_exists(Layout::class, false)) {
 
         public function __construct()
         {
-            $this->BlockPositions = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->PageLayouts = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->BlockPositions = new ArrayCollection();
+            $this->PageLayouts = new ArrayCollection();
         }
 
         public function getId(): int | null
@@ -167,7 +169,7 @@ if (!class_exists(Layout::class, false)) {
             $this->BlockPositions->removeElement($BlockPosition);
         }
 
-        public function getBlockPositions(): \Doctrine\Common\Collections\Collection
+        public function getBlockPositions(): Collection
         {
             return $this->BlockPositions;
         }
@@ -184,7 +186,7 @@ if (!class_exists(Layout::class, false)) {
             $this->PageLayouts->removeElement($PageLayout);
         }
 
-        public function getPageLayouts(): \Doctrine\Common\Collections\Collection
+        public function getPageLayouts(): Collection
         {
             return $this->PageLayouts;
         }
@@ -246,6 +248,7 @@ if (!class_exists(Layout::class, false)) {
         }
 
 
+
         public function getBlockPositionsByTargetId($targetId)
         {
             return $this->BlockPositions->filter(
@@ -253,6 +256,76 @@ if (!class_exists(Layout::class, false)) {
                     return $BlockPosition->getSection() == $targetId;
                 }
             );
+        }
+
+        public function getUnused()
+        {
+            return $this->getBlocks(self::TARGET_ID_UNUSED);
+        }
+
+        public function getHead()
+        {
+            return $this->getBlocks(self::TARGET_ID_HEAD);
+        }
+
+        public function getBodyAfter()
+        {
+            return $this->getBlocks(self::TARGET_ID_BODY_AFTER);
+        }
+
+        public function getHeader()
+        {
+            return $this->getBlocks(self::TARGET_ID_HEADER);
+        }
+        public function getContentsTop()
+        {
+            return $this->getBlocks(self::TARGET_ID_CONTENTS_TOP);
+        }
+
+        public function getSideLeft()
+        {
+            return $this->getBlocks(self::TARGET_ID_SIDE_LEFT);
+        }
+
+        public function getMainTop()
+        {
+            return $this->getBlocks(self::TARGET_ID_MAIN_TOP);
+        }
+
+        public function getMainBottom()
+        {
+            return $this->getBlocks(self::TARGET_ID_MAIN_BOTTOM);
+        }
+
+        public function getSideRight()
+        {
+            return $this->getBlocks(self::TARGET_ID_SIDE_RIGHT);
+        }
+
+        public function getContentsBottom()
+        {
+            return $this->getBlocks(self::TARGET_ID_CONTENTS_BOTTOM);
+        }
+
+        public function getFooter()
+        {
+            return $this->getBlocks(self::TARGET_ID_FOOTER);
+        }
+
+        public function getDrawer()
+        {
+            return $this->getBlocks(self::TARGET_ID_DRAWER);
+        }
+
+        public function getCloseBodyBefore()
+        {
+            return $this->getBlocks(self::TARGET_ID_CLOSE_BODY_BEFORE);
+        }
+
+
+        public function __toString()
+        {
+            return (string) $this->name;
         }
     }
 }
