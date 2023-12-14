@@ -5,6 +5,7 @@ twig:
         ketcau_config: '@Ketcau\Common\KetcauConfig'
         event_dispatcher: '@event_dispatcher'
     paths:
+        '%ketcau_theme_front_dir%': ~
         '%ketcau_theme_front_default_dir%': ~
         '%ketcau_theme_admin_dir%': admin
         '%ketcau_theme_admin_default_dir%': admin

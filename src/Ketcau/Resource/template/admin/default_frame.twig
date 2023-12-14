@@ -6,8 +6,9 @@
     <meta name="ketcau-csrf-token" content="{{ csrf_token(constant('Ketcau\\Common\\Constant::TOKEN_NAME')) }}" />
     <title>{{ block('sub_title') }} {{ block('title') }}</title>
     <link rel="stylesheet" href="/template/fontawesome/css/all.css" />
-    <script src="/bundle/admin.bundle.js"></script>
-    <link rel="stylesheet" href="/bundle/admin.bundle.css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css', 'admin') }}">
+    <link rel="stylesheet" href="{{ asset('admin.bundle.css', 'bundle') }}" />
+    <script src="{{ asset('admin.bundle.js', 'bundle') }}"></script>
     {% block stylesheet %}
     {% endblock stylesheet %}
 </head>
@@ -16,9 +17,16 @@
     <header class="c-header-bar">
         <div class="c-header-bar-container">
             <div class="c-header-bar-logo">
-                <h1><a class="c-header-bar-shop-title" href="{{ url('admin_homepage') }}"><span>POCKET</span></a></h1>
+                <h1><a class="c-header-bar-shop-title" href="{{ url('admin_homepage') }}"><span>Pocket</span></a></h1>
             </div>
-            <a class="c-header-bar-toggle-button"></a>
+            <a class="c-header-bar-toggle-button"><i class="fa fa-bars" aria-hidden="false"></i></a>
+            <a class="c-header-bar-user-menu"
+               data-bs-container="body"
+               data-bs-toggle="popover"
+               data-bs-placement="bottom"
+               title="{{ 'admin.header.last_login'|trans }}"
+               data-bs-content="&lt;p&gt;{{ app.user.login_date|date_min }}&lt;/p&gt;&lt;a href='{{ url("admin_change_password") }}' class='btn btn-ec-regular w-100 mb-2'&gt;{{ 'admin.header.change_password'|trans }}&lt;/a&gt;{% if app.user.two_factor_auth_enabled %}&lt;a href='{{ url("admin_setting_system_two_factor_auth_edit") }}' class='btn btn-ec-regular w-100 mb-2'&gt;{{ 'admin.header.two_factor_auth'|trans }}&lt;/a&gt;{% endif %}&lt;a href='{{ url("admin_logout") }}' class='btn btn-ec-sub w-100'&gt;{{ 'admin.header.logout'|trans }}&lt;/a&gt;"
+               data-bs-html="true"><i class="fa fa-user-circle" aria-hidden="true"></i><span>{{ 'admin.header.user_name'|trans({'%name%': app.user.name}) }}</span><i class="fa fa-angle-down" aria-hidden="true"></i></a>
         </div>
     </header>
 

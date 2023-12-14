@@ -10,7 +10,7 @@ class TopController extends AbstractController
     /**
      * @Route("/", name="homepage", methods={"GET"})
      */
-    #[Template("@front/index.twig")]
+    #[Template("index.twig")]
     public function index(): array
     {
         return [];

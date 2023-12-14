@@ -9,7 +9,7 @@
 
   justify-content: space-between;
 
-  background: rgba(#198754, .5);
+  background: rgba($orange, .5);
 
   &-left {
     display: inline-table;
@@ -21,6 +21,10 @@
       font-weight: bold;
       vertical-align: middle;
       text-align: center;
+
+      > a {
+        color: $green;
+      }
     }
   }
 
