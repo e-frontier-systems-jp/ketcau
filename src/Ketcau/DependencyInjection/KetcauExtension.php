@@ -49,15 +49,15 @@ class KetcauExtension extends Extension implements PrependExtensionInterface
             ['path' => '^/%ketcau_admin_route%/login', 'roles' => 'IS_AUTHENTICATED_ANONYMOUSLY'],
             ['path' => '^/%ketcau_admin_route%/', 'roles' => 'ROLE_ADMIN'],
         ];
-        if ($forceSSL) {
-            foreach ($accessControl as &$control) {
-                $control['require_channel'] = 'https';
-            }
-        }
+//        if ($forceSSL) {
+//            foreach ($accessControl as &$control) {
+//                $control['require_channel'] = 'https';
+//            }
+//        }
 
-//        $container->prependExtensionConfig('security', [
-//            'access_control' => $accessControl,
-//        ]);
+        $container->prependExtensionConfig('security', [
+            'access_control' => $accessControl,
+        ]);
 
         $configs = $container->getExtensionConfig('ketcau');
         $configs = array_reverse($configs);

@@ -3,7 +3,9 @@
 namespace Ketcau\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ketcau\Entity\Master\Work;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -17,7 +19,7 @@ if (!class_exists('\Ketcau\Entity\Member')) {
      * @ORM\HasLifecycleCallbacks()
      * @ORM\Entity(repositoryClass="Ketcau\Repository\MemberRepository")
      */
-    class Member extends \Ketcau\Entity\AbstractEntity implements UserInterface, \Serializable
+    class Member extends AbstractEntity implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
     {
         /**
          * @var int
@@ -34,6 +36,13 @@ if (!class_exists('\Ketcau\Entity\Member')) {
          */
         private $name;
 
+
+        #[ORM\Column(type: 'string', length: 180, unique: true, nullable: false)]
+        private $mail;
+
+
+        #[ORM\Column(type: 'json')]
+        private $roles = [];
 
         /**
          * @var string|null
@@ -114,7 +123,7 @@ if (!class_exists('\Ketcau\Entity\Member')) {
 
 
         /**
-         * @var \Ketcau\Entity\Master\Work
+         * @var Work
          * @ORM\ManyToOne(targetEntity="Ketcau\Entity\Master\Work")
          * @ORM\JoinColumns({
          *     @ORM\JoinColumn(name="work_id", referencedColumnName="id")
@@ -124,7 +133,7 @@ if (!class_exists('\Ketcau\Entity\Member')) {
 
 
         /**
-         * @var \Ketcau\Entity\Authority
+         * @var Authority
          * @ORM\ManyToOne(targetEntity="Ketcau\Entity\Authority")
          * @ORM\JoinColumns({
          *     @ORM\JoinColumn(name="authority_id", referencedColumnName="id")
@@ -134,7 +143,7 @@ if (!class_exists('\Ketcau\Entity\Member')) {
 
 
         /**
-         * @var \Ketcau\Entity\Member
+         * @var Member
          * @ORM\ManyToOne(targetEntity="Ketcau\Entity\Member")
          * @ORM\JoinColumns({
          *     @ORM\JoinColumn(name="creator_id", referencedColumnName="id")
@@ -210,15 +219,9 @@ if (!class_exists('\Ketcau\Entity\Member')) {
             return $this;
         }
 
-        public function getSalt(): string
+        public function getSalt(): ?string
         {
-            return $this->salt;
-        }
-
-        public function setSalt(string $salt): Member
-        {
-            $this->salt = $salt;
-            return $this;
+            return null;
         }
 
         public function getSortNo(): int
@@ -320,13 +323,38 @@ if (!class_exists('\Ketcau\Entity\Member')) {
             return $this;
         }
 
+        /**
+         * @return ?string
+         */
+        public function getMail(): ?string
+        {
+            return $this->mail;
+        }
 
-
+        /**
+         * @param string $mail
+         * @return Member
+         */
+        public function setMail(string $mail): self
+        {
+            $this->mail = $mail;
+            return $this;
+        }
 
         public function getRoles(): array
         {
-            return ['ROLE_ADMIN'];
+            $roles = $this->roles;
+            $roles[] = 'ROLE_ADMIN';
+            return array_unique($roles);
         }
+
+
+        public function setRoles($roles): self
+        {
+            $this->roles = $roles;
+            return $this;
+        }
+
 
         public function eraseCredentials()
         {

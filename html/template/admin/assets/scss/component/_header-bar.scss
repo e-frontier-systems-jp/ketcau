@@ -19,5 +19,53 @@
     }
   }
 
+  &-container {
+    display: table;
+    width: 100%;
+    max-width: 2500px;
+  }
 
+  &-logo {
+    display: table-cell;
+    padding: 0 20px;
+    width: 200px;
+    height: 65px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+
+  }
+
+  &-user-menu {
+    display: table-cell;
+    padding: 0 20px;
+    width: 170px;
+    height: 65px;
+    color: #ffffff;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    &:hover {
+      background: $white15;
+    }
+
+    span {
+      font-weight: bold;
+      vertical-align: middle;
+    }
+
+    .fa-angle-down {
+      padding-left: 10px;
+      font-size: 24px;
+      vertical-align: middle;
+    }
+
+    .fa-user-circle {
+      padding-right: 10px;
+      font-size: 34px;
+      vertical-align: middle;
+    }
+  }
 }

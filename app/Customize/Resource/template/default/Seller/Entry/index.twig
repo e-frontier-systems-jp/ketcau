@@ -45,6 +45,33 @@
                                 </div>
                             </dd>
                         </dl>
+                        <dl>
+                            <dt>{{ form_label(form.company_url, 'common.company_url', { 'label_attr': { class: 'kc-label' } }) }}</dt>
+                            <dd>
+                                <div class="{{ has_errors(form.company_url) ? 'error' }}">
+                                    {{ form_widget(form.company_url, { 'attr': { 'placeholder': 'common.company_url' } }) }}
+                                    {{ form_errors(form.company_url) }}
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>{{ form_label(form.phone_number, 'common.phone_number', { 'label_attr': { class: 'kc-label' } }) }}</dt>
+                            <dd>
+                                <div class="{{ has_errors(form.phone_number) ? 'error' }}">
+                                    {{ form_widget(form.phone_number, { 'attr': { 'placeholder': 'common.phone_number' } }) }}
+                                    {{ form_errors(form.phone_number) }}
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>{{ form_label(form.postal_code, 'common.postal_code', { 'label_attr': { class: 'kc-label' } }) }}</dt>
+                            <dd>
+                                <div class="{{ has_errors(form.postal_code) ? 'error' }}">
+                                    {{ form_widget(form.postal_code) }}
+                                    {{ form_errors(form.postal_code) }}
+                                </div>
+                            </dd>
+                        </dl>
                     </div>
                 </form>
             </div>

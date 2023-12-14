@@ -3,10 +3,13 @@
 namespace Ketcau\Controller\Admin;
 
 use Ketcau\Controller\AbstractController;
+use Ketcau\Form\Type\Admin\LoginType;
 use Ketcau\Repository\MemberRepository;
 use Ketcau\Repository\PageRepository;
 use Symfony\Bridge\Twig\Attribute\Template;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -47,6 +50,42 @@ class AdminController extends AbstractController
         $this->passwordHasher = $passwordHasher;
 
         $this->pageRepository = $pageRepository;
+    }
+
+
+    /**
+     * @Route("/%ketcau_admin_route%/login", name="admin_login", methods={"GET", "POST"})
+     * @param Request $request
+     * @return array|Response
+     */
+    #[Template("@admin/login.twig")]
+    public function login(Request $request)
+    {
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_homepage');
+        }
+
+        $builder = $this->formFactory->createNamedBuilder('', LoginType::class);
+
+        // TODO: Event dispatch
+
+        $form = $builder->getForm();
+
+        return [
+            'error' => $this->helper->getLastAuthenticationError(),
+            'form' => $form->createView(),
+        ];
+    }
+
+
+    /**
+     * @Route("/%ketcau_admin_route%/logout", name="admin_logout", methods={"GET"})
+     * @param Security $security
+     * @return void
+     */
+    public function logout(Security $security): void
+    {
+        $security->logout(false);
     }
 
 

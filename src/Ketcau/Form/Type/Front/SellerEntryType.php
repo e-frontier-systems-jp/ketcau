@@ -5,6 +5,8 @@ namespace Ketcau\Form\Type\Front;
 use Ketcau\Common\KetcauConfig;
 use Ketcau\Form\Type\KanaType;
 use Ketcau\Form\Type\NameType;
+use Ketcau\Form\Type\PhoneNumberType;
+use Ketcau\Form\Type\PostalType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,6 +39,27 @@ class SellerEntryType extends AbstractType
                     new Assert\Length([
                         'max' => $this->ketcauConfig['ketcau_stext_len'],
                     ]),
+                ],
+            ])
+            ->add('company_url', TextType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Assert\Length([
+                        'max' => $this->ketcauConfig['ketcau_stext_len'],
+                    ]),
+                ],
+            ])
+            ->add('phone_number', PhoneNumberType::class, [
+                'required' => true,
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
+            ])
+
+            ->add('postal_code', PostalType::class, [
+                'required' => true,
+                'constraints' => [
+                    new Assert\NotBlank(),
                 ],
             ])
         ;

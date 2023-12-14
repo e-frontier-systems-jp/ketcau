@@ -85,15 +85,23 @@ services:
         lazy: true
         public: true
 
-    Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
-
     native_file_session_handler:
         class: Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler
         arguments:
             - '%session.save_path%'
+
+    Ketcau\Session\Storage\Handler\SameSiteNoneCompatSessionHandler:
+        arguments:
+            - '@native_file_session_handler'
 
     Ketcau\DependencyInjection\Facade\AnnotationReaderFacade:
         public: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
+
+    Symfony\Component\HttpFoundation\Session\SessionInterface:
+        factory: ['@session.factory', 'createSession']
+        public: true
+

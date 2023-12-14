@@ -21,7 +21,7 @@ parameters:
   ketcau_password_hash_algos: SHA256
   ketcau_admin_route: '%env(KETCAU_ADMIN_ROUTE)%'
   ketcau_force_ssl: '%env(bool:KETCAU_FORCE_SSL)%'
-  ketcau_theme_app_dir: '%kernel.project_dir%/app/template'
+  ketcau_theme_app_dir: '%kernel.project_dir%/app/Customize/Resource/template'
   ketcau_theme_src_dir: '%kernel.project_dir%/src/Ketcau/Resource/template'
   ketcau_theme_user_data_dir: '%ketcau_theme_app_dir%/user_data'
   ketcau_theme_front_dir: '%ketcau_theme_app_dir%/%ketcau.theme%'
@@ -29,8 +29,13 @@ parameters:
   ketcau_theme_admin_dir: '%ketcau_theme_app_dir%/admin'
   ketcau_theme_admin_default_dir: '%ketcau_theme_src_dir%/admin'
   ketcau_content_maintenance_file_path: '%env(KETCAU_MAINTENANCE_FILE_PATH)%'
+  ketcau_twig_block_templates: []
   ketcau_composer_memory_limit: 1536M
   plugin_realdir: '$kernel.project_dir%/app/Plugin'
+  ketcau_id_min_len: 4
+  ketcau_id_max_len: 50
+  ketcau_password_min_len: 12
+  ketcau_password_max_len: 50
   ketcau_name_len: 16
   ketcau_kana_len: 25
   ketcau_address1_len: 32

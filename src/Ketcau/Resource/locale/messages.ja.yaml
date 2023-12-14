@@ -22,6 +22,16 @@ admin.common.delete_complete: 削除しました
 
 admin.home: ホーム
 
+admin.header.user_name: '%name% 様'
+admin.header.logout: ログアウト
+admin.header.last_login: 最終ログイン
+admin.header.change_password: パスワード変更
+
+admin.login.enable_javascript: JavaScriptを有効にしてご利用ください
+admin.login.login_id: ログインID
+admin.login.password: パスワード
+admin.login.login: ログイン
+
 admin.error.go_to_login: ログイン画面へ
 
 admin.common.create_new: 新規作成

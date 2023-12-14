@@ -4,10 +4,12 @@ namespace Ketcau;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Ketcau\Common\KetcauNav;
+use Ketcau\Common\KetcauTwigBlock;
 use Ketcau\DependencyInjection\Compiler\AutoConfigurationTagPass;
 use Ketcau\DependencyInjection\Compiler\NavCompilerPass;
 use Ketcau\DependencyInjection\Compiler\PluginPass;
 use Ketcau\DependencyInjection\Compiler\QueryCustomizerPass;
+use Ketcau\DependencyInjection\Compiler\TwigBlockPass;
 use Ketcau\DependencyInjection\Compiler\TwigExtensionPass;
 use Ketcau\DependencyInjection\Facade\AnnotationReaderFacade;
 use Ketcau\DependencyInjection\Facade\LoggerFacade;
@@ -194,15 +196,23 @@ class Kernel extends BaseKernel
 
         $container->addCompilerPass(new PluginPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 10);
 
+        // twigのurl,path関数を差し替え
         $container->addCompilerPass(new TwigExtensionPass());
 
+        // クエリカスタマイズの拡張
         $container->registerForAutoconfiguration(QueryCustomizer::class)
             ->addTag(QueryCustomizerPass::QUERY_CUSTOMIZER_TAG);
         $container->addCompilerPass(new QueryCustomizerPass());
 
+        // 管理ナビの拡張
         $container->registerForAutoconfiguration(KetcauNav::class)
             ->addTag(NavCompilerPass::NAV_TAG);
         $container->addCompilerPass(new NavCompilerPass());
+
+        // TwigBlockの拡張
+        $container->registerForAutoconfiguration(KetcauTwigBlock::class)
+            ->addTag(TwigBlockPass::TWIG_BLOCK_TAG);
+        $container->addCompilerPass(new TwigBlockPass());
     }
 
 
