@@ -10,7 +10,6 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl);
 });
 
-
 var cardCollapseIconDown = function () {
     $(function () {
         $('.ec-cardCollapse').on('hidden.bs.collapse', function () {
