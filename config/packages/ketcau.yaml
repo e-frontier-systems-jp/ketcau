@@ -36,11 +36,13 @@ parameters:
   ketcau_id_max_len: 50
   ketcau_password_min_len: 12
   ketcau_password_max_len: 50
+  ketcau_password_pattern: '/\A(?=.*?[a-z])(?=.*?\d)[!-~]+\z/i'
   ketcau_name_len: 16
   ketcau_kana_len: 25
   ketcau_address1_len: 32
   ketcau_address2_len: 32
   ketcau_tel_len_max: 14
   ketcau_postal_code: 8
+  ketcau_email_len: 255
   ketcau_stext_len: 255
   ketcau_ltext_len: 3000
