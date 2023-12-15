@@ -3,10 +3,13 @@
 namespace Ketcau\Form\Type\Front;
 
 use Ketcau\Common\KetcauConfig;
+use Ketcau\Form\Type\AddressType;
 use Ketcau\Form\Type\KanaType;
 use Ketcau\Form\Type\NameType;
 use Ketcau\Form\Type\PhoneNumberType;
 use Ketcau\Form\Type\PostalType;
+use Ketcau\Form\Type\RepeatedEmailType;
+use Ketcau\Form\Type\RepeatedPasswordType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -56,12 +59,16 @@ class SellerEntryType extends AbstractType
                 ],
             ])
 
-            ->add('postal_code', PostalType::class, [
+            ->add('postal_code', PostalType::class)
+            ->add('address', AddressType::class, [
                 'required' => true,
                 'constraints' => [
                     new Assert\NotBlank(),
                 ],
             ])
+
+            ->add('email', RepeatedEmailType::class)
+            ->add('plain_password', RepeatedPasswordType::class)
         ;
     }
 

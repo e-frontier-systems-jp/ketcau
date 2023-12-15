@@ -12,7 +12,7 @@ common.kana: お名前(カナ)
 common.last_kana: セイ
 common.first_kana: メイ
 common.company_name: 会社名
-
+common.password_sample: '半角英数記号%min%〜%max%文字'
 common.delete_confirm: 削除してもよろしいですか？
 
 admin.common.restrict_file_upload_info: 'この機能の利用頻度が低い場合、使用しない間は無効化することでセキュリティを更に向上させることができます。環境変数 KETCAU_RESTRICT_FILE_UPLOAD を 1 に設定することで機能を無効化することが可能です。'

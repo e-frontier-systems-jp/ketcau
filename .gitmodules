@@ -1,0 +1,3 @@
+[submodule "app/Customize"]
+	path = app/Customize
+	url = https://github.com/e-frontier-systems/pocket.git
