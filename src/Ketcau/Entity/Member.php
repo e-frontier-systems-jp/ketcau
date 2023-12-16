@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
-if (!class_exists('\Ketcau\Entity\Member')) {
+if (!class_exists(Member::class, false)) {
 
     /**
      * @ORM\Table(name="dtb_member")
