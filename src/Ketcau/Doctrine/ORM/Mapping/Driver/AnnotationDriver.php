@@ -5,17 +5,17 @@ namespace Ketcau\Doctrine\ORM\Mapping\Driver;
 use Doctrine\Persistence\Mapping\MappingException;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver as AnnotationDriverBase;
 
-class AnnotationDriver extends \Doctrine\ORM\Mapping\Driver\AnnotationDriver
+class AnnotationDriver extends AnnotationDriverBase
 {
     protected $trait_proxies_directory;
 
-    public function setTraitProxiesDirectory($directory)
+    public function setTraitProxiesDirectory($directory): void
     {
         $this->trait_proxies_directory = $directory;
     }
 
 
-    public function getAllClassNames()
+    public function getAllClassNames(): ?array
     {
         if ($this->classNames !== null) {
             return $this->classNames;

@@ -46,3 +46,6 @@ framework:
     ide: ~
     validation: { enable_annotations: true }
 
+    serializer:
+        mapping:
+            paths: ['%kernel.project_dir%/config/packages/serializer']

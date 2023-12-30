@@ -3,12 +3,13 @@
 namespace Ketcau\Entity\Master;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ketcau\Entity\AbstractEntity;
 
 
 /**
  * @ORM\MappedSuperclass()
  */
-abstract class AbstractMasterEntity extends \Ketcau\Entity\AbstractEntity
+abstract class AbstractMasterEntity extends AbstractEntity
 {
 
     public function __toString(): string

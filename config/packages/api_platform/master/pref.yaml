@@ -1,0 +1,15 @@
+resources:
+    Ketcau\Entity\Master\Pref:
+        attributes:
+            filters:
+                - api.master.order_filter
+        paginationItemsPerPage: 50
+        operations:
+
+            master_pref_get_collection:
+                class: ApiPlatform\Metadata\GetCollection
+                uriTemplate: /master/pref
+
+            master_pref_get:
+                class: ApiPlatform\Metadata\Get
+                uriTemplate: /master/pref/{id}

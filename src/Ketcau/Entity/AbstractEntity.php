@@ -35,7 +35,7 @@ abstract class AbstractEntity implements \ArrayAccess
     }
 
     #[\ReturnTypeWillChange]
-    public function offsetGet(mixed $offset)
+    public function offsetGet(mixed $offset): mixed
     {
         $inflector = new Inflector(new NoopWordInflector(), new NoopWordInflector());
         $method = $inflector->classify($offset);
@@ -49,6 +49,7 @@ abstract class AbstractEntity implements \ArrayAccess
         } elseif (method_exists($this, "has$method")) {
             return $this->{"has$method"}();
         }
+        throw new \InvalidArgumentException();
     }
 
     #[\ReturnTypeWillChange]
@@ -57,7 +58,7 @@ abstract class AbstractEntity implements \ArrayAccess
     }
 
 
-    public function setPropertiesFromArray(array $arrProps, array $excludeAttribute = [], \ReflectionClass $parentClass = null)
+    public function offsetPropertiesFromArray(array $arrProps, array $excludeAttribute = [], \ReflectionClass $parentClass = null): void
     {
         $objReflect = null;
         if (is_object($parentClass)) {
@@ -78,7 +79,7 @@ abstract class AbstractEntity implements \ArrayAccess
 
         $parentClass = $objReflect->getParentClass();
         if (is_object($parentClass)) {
-            self::setPropertiesFromArray($arrProps, $excludeAttribute, $parentClass);
+            self::offsetPropertiesFromArray($arrProps, $excludeAttribute, $parentClass);
         }
     }
 
@@ -146,7 +147,7 @@ abstract class AbstractEntity implements \ArrayAccess
     }
 
 
-    public function toXML(array $excludeAttribute = ['__initializer__', '__cloner__', '__isInitialized__'])
+    public function toXML(array $excludeAttribute = ['__initializer__', '__cloner__', '__isInitialized__']): string
     {
         $ReflectionClass = new \ReflectionClass($this);
         $serializer = new Serializer([new PropertyNormalizer()], [new XmlEncoder([XmlEncoder::ROOT_NODE_NAME => $ReflectionClass->getShortName()])]);
@@ -160,9 +161,9 @@ abstract class AbstractEntity implements \ArrayAccess
     }
 
 
-    public function copyProperties($srcObject, array $excludeAttribute = [])
+    public function copyProperties($srcObject, array $excludeAttribute = []): self
     {
-        $this->setPropertiesFromArray($srcObject->toArray($excludeAttribute), $excludeAttribute);
+        $this->offsetPropertiesFromArray($srcObject->toArray($excludeAttribute), $excludeAttribute);
 
         return $this;
     }

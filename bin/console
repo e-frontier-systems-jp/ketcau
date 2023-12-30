@@ -18,7 +18,7 @@ require_once dirname(__DIR__).'/vendor/autoload.php';
 
 if (!isset($_SERVER['APP_ENV'])) {
     if (file_exists(__DIR__. '/../.env')) {
-        (Dotenv::createUnsafeMutable(__DIR__, '/../.env'))->load();
+        (Dotenv::createUnsafeMutable(__DIR__. '/../'))->load();
     }
 }
 
