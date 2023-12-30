@@ -5,6 +5,7 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html
 RUN a2enmod deflate expires rewrite
 
 RUN apt update -y && apt upgrade -y
+RUN apt install unzip p7zip zstd -y
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
@@ -21,11 +22,10 @@ RUN install-php-extensions redis
 RUN install-php-extensions xdebug
 RUN install-php-extensions DOM
 RUN install-php-extensions zip
+RUN install-php-extensions zstd
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 # RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN cd /tmp
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -33,5 +33,14 @@ RUN php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
+
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY php.ini /usr/local/etc/php/php.ini
+RUN { \
+      echo 'zend_extension=xdebug.so'; \
+      echo 'xdebug.mode = debug'; \
+      echo 'xdebug.client_host = host.docker.internal'; \
+      echo 'xdebug.start_with_request = no'; \
+    } > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 CMD ["apache2-foreground"]

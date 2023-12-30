@@ -105,3 +105,17 @@ services:
         factory: ['@session.factory', 'createSession']
         public: true
 
+
+    # API Platform
+    api.master.order_filter:
+        parent: api_platform.doctrine.orm.order_filter
+        arguments:
+            $properties: [$date: ~]
+            $orderParameterName: sort_no
+        tags: [ api_platform.filter ]
+        autowire: false
+        autoconfigure: false
+
+    Ketcau\Api\State\UserPasswordHasher:
+        bind:
+            $processor: '@api_platform.doctrine.orm.state.persist_processor'

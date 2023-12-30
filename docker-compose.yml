@@ -8,13 +8,11 @@ services:
   ketcau:
     build: ./dockerfile/apache
     ports:
-      - "8088:80"
+      - "80:80"
     volumes:
       - ./:/var/www
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/html
-      APP_ENV: "dev"
-      APP_DEBUG: 1
     networks:
       - backend
 
@@ -29,6 +27,15 @@ services:
 #      APP_DEBUG: 1
 #    networks:
 #      - backend
+
+  nuxt3:
+    build: ./dockerfile/nuxt3
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app/nuxt/pocket:/home/app
+    networks:
+      - backend
 
   mailcatcher:
     image: schickling/mailcatcher

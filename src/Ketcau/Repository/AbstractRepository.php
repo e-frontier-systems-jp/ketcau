@@ -4,21 +4,36 @@ namespace Ketcau\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Exception;
+use Doctrine\Persistence\ManagerRegistry;
+use Ketcau\Common\KetcauConfig;
 
 abstract class AbstractRepository extends ServiceEntityRepository
 {
-    protected $ketcauConfig;
+    protected ?KetcauConfig $ketcauConfig = null;
 
 
-    public function delete($entity): void
+
+    public function __construct(ManagerRegistry $registry, string $entityClass)
     {
-        $this->getEntityManager()->remove($entity);
+        parent::__construct($registry, $entityClass);
     }
 
 
-    public function save($entity): void
+    protected function removeEntity($entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+
+    protected function saveEntity(object $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
     }
 
 

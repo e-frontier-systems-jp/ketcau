@@ -1,0 +1,14 @@
+resources:
+    Ketcau\Entity\Master\Work:
+        attributes:
+            filters:
+                - api.master.order_filter
+        operations:
+
+            master_work_get_collection:
+                class: ApiPlatform\Metadata\GetCollection
+                uriTemplate: /master/work
+
+            master_work_get:
+                class: ApiPlatform\Metadata\Get
+                uriTemplate: /master/work/{id}

@@ -1,0 +1,8 @@
+resources:
+    Customize\Entity\Seller:
+        operations:
+
+            seller_entry_post:
+                class: ApiPlatform\Metadata\Post
+                uriTemplate: /seller/entry
+                read: false

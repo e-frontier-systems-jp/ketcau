@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping\MappingException;
 use Ketcau\Util\StringUtil;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
+use RegexIterator;
 
 class ReloadSafeAnnotationDriver extends AnnotationDriver
 {
@@ -14,7 +15,7 @@ class ReloadSafeAnnotationDriver extends AnnotationDriver
     protected $outputDir;
 
 
-    public function setNewProxyFiles($newProxyFiles)
+    public function setNewProxyFiles($newProxyFiles): void
     {
         $this->newProxyFiles = array_map(function ($file) {
             return realpath($file);
@@ -22,13 +23,13 @@ class ReloadSafeAnnotationDriver extends AnnotationDriver
     }
 
 
-    public function setOutputDir($outputDir)
+    public function setOutputDir($outputDir): void
     {
         $this->outputDir = $outputDir;
     }
 
 
-    public function getAllClassNames()
+    public function getAllClassNames(): ?array
     {
         if ($this->classNames !== null) {
             return $this->classNames;
@@ -45,11 +46,11 @@ class ReloadSafeAnnotationDriver extends AnnotationDriver
 
             $iterator = new \RegexIterator(
                 new \RecursiveIteratorIterator(
-                    new \RecursiveRegexIterator($path, \FilesystemIterator::SKIP_DOTS),
+                    new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS),
                     \RecursiveIteratorIterator::LEAVES_ONLY
                 ),
                 '/^.+'. preg_quote($this->fileExtension). '$/i',
-                \RecursiveRegexIterator::GET_MATCH
+                RegexIterator::GET_MATCH
             );
 
             foreach ($iterator as $file) {
@@ -89,7 +90,7 @@ class ReloadSafeAnnotationDriver extends AnnotationDriver
     }
 
 
-    private function getClassNamesFromTokens($sourceFile)
+    private function getClassNamesFromTokens($sourceFile): array
     {
         $tokens = Tokens::fromCode(file_get_contents($sourceFile));
         $results = [];

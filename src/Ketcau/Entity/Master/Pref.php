@@ -2,6 +2,7 @@
 
 namespace Ketcau\Entity\Master;
 
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 if (!class_exists(Pref::class)) {
@@ -14,6 +15,7 @@ if (!class_exists(Pref::class)) {
      * @ORM\Entity(repositoryClass="Ketcau\Repository\Master\PrefRepository")
      * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
      */
+    #[ApiResource]
     class Pref extends AbstractMasterEntity
     {
     }
